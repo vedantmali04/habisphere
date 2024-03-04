@@ -1,0 +1,147 @@
+main {
+  display: flex;
+  height: 100vh;
+}
+
+main > section {
+  width: 100%;
+  height: 100%;
+}
+
+.get-started-sec.illus-sec {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 2.4rem 1.6rem;
+  background-color: var(--clr-bg-white);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.illus-sec .illus {
+  height: 30rem;
+}
+
+.illus-sec p {
+  padding: 1.6rem;
+  width: 35ch;
+}
+
+.form-sec {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.inner-form-sec {
+  width: 100%;
+  padding: 4rem 1.6rem;
+}
+
+.inner-form-sec .form-step {
+  width: 100%;
+}
+
+.inner-form-sec fieldset {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inner-form-sec fieldset:first-of-type {
+  margin-top: 3.2rem;
+}
+
+@media (min-width: 769px) {
+  .get-started-sec.illus-sec.illus-sec {
+    width: 50%;
+    padding: 4.8rem 1.6rem;
+    z-index: -1;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .illus-sec p {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .inner-form-sec {
+    width: 50%;
+    margin-left: auto;
+  }
+
+  .inner-form-sec fieldset {
+    margin-left: 0.8rem;
+    margin-right: 0.8rem;
+  }
+}
+
+/* /////////////////////////
+DECORATIONS, ILLUSTRATIONS and ANIMATIONS
+///////////////////////// */
+
+.signup-leaves {
+  position: absolute;
+  top: -2rem;
+  right: -3rem;
+  min-width: 18rem;
+  width: 20vw;
+  max-width: 24rem;
+  animation: swayingLeaves 8s infinite;
+  transform-origin: top right;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+@keyframes swayingLeaves {
+  0%,
+  100% {
+    rotate: -5deg;
+  }
+
+  50% {
+    rotate: 5deg;
+  }
+}
+
+.signup-meditation .woman {
+  animation: womanLevitation 8s infinite;
+  filter: drop-shadow(2px 2px 4px rgba(255, 2, 2, 0.3));
+}
+
+@keyframes womanLevitation {
+  0%,
+  100% {
+    translate: 0px 0px;
+  }
+
+  50% {
+    translate: 0 -36px;
+  }
+}
+
+.signup-meditation .plant {
+  --deg-start: 1deg;
+  --deg-end: calc(-1 * var(--deg-start));
+  transform-origin: center;
+  animation: swayingPlants 10s infinite;
+}
+
+.signup-meditation .plant:nth-of-type(2) {
+  --deg-start: -1deg;
+}
+
+.signup-meditation .plant:nth-of-type(5),
+.signup-meditation .plant:nth-of-type(6) {
+  --deg-start: 0.5deg;
+  --deg-end: 0deg;
+}
+
+@keyframes swayingPlants {
+  0%,
+  100% {
+    rotate: var(--deg-start);
+  }
+
+  50% {
+    rotate: var(--deg-end);
+  }
+}
