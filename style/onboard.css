@@ -46,8 +46,9 @@ main > section {
   margin-right: auto;
 }
 
-.inner-form-sec fieldset:first-of-type {
-  margin-top: 3.2rem;
+.inner-form-sec fieldset:first-of-type,
+.inner-form-sec fieldset:has(button):last-of-type {
+  margin-top: 2.4rem;
 }
 
 @media (min-width: 769px) {
@@ -69,8 +70,8 @@ main > section {
   }
 
   .inner-form-sec fieldset {
-    margin-left: 0.8rem;
-    margin-right: 0.8rem;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

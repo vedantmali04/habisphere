@@ -115,10 +115,6 @@ h6 {
   color: var(--clr-text-grey);
 }
 
-p {
-  max-width: 70ch;
-}
-
 .ff-head {
   font-family: var(--ff-head);
   font-size: var(--fs-900);
@@ -290,7 +286,7 @@ fieldset .check-radio-box:has(input:disabled) * {
 }
 
 button.primary {
-  font-weight: 600;
+  font-weight: 500;
   background: var(--gradient-main);
   color: var(--clr-text-grey);
 }
@@ -391,7 +387,7 @@ fieldset label {
   justify-content: space-between;
 }
 
-fieldset:has(:is(input, textarea, select)) label {
+fieldset:has(.text-input) label {
   position: absolute;
   z-index: 11;
   padding: 0.8rem 1.6rem;
@@ -402,24 +398,24 @@ fieldset:has(:is(input, textarea, select)) label {
   left: 0;
 }
 
-fieldset:has(:is(input, textarea, select):hover) label {
+fieldset:has(.text-input:hover) label {
   color: var(--clr-accent-light);
 }
 
-fieldset:has(:is(input, textarea, select):focus) label {
-  color: var(--clr-accent);
+fieldset:has(:is(.text-input:focus, .text-input.filled)) label {
   font-size: var(--fs-200);
+  padding: 0.2rem 1.6rem;
 }
 
-fieldset:has(:is(input, textarea, select):focus) label {
-  padding: .2rem 1.6rem;
+fieldset:has(.text-input:focus) label {
+  color: var(--clr-accent);
 }
 
 fieldset label .counter {
   color: var(--clr-text-grey);
 }
 
-fieldset :is(input, textarea, select) {
+fieldset .text-input {
   font: inherit;
   outline: none;
   border: none;
@@ -432,19 +428,19 @@ fieldset :is(input, textarea, select) {
   z-index: 10;
 }
 
-fieldset :is(input, textarea, select):hover {
+fieldset .text-input:hover {
   background-color: var(--clr-primary-hover);
   border-color: transparent;
   border-bottom-color: var(--clr-primary);
 }
 
-fieldset :is(input, textarea, select):focus {
+fieldset .text-input:focus {
   border-color: transparent;
   background-color: var(--clr-primary-focus);
   border-bottom-color: var(--clr-primary-dark);
 }
 
-fieldset input {
+fieldset .text-input {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -471,7 +467,7 @@ fieldset .trail {
   border-radius: 50%;
 }
 
-fieldset:has(.trail) :is(input, textarea, select) {
+fieldset:has(.trail) .text-input {
   padding-right: 3.2rem;
 }
 
@@ -487,17 +483,19 @@ fieldset .check-radio-box label {
   padding: 0.4rem;
   border-radius: 0.2rem;
   text-transform: capitalize;
+  cursor: pointer;
+  text-align: left;
 }
 
 fieldset .check-radio-box label input {
   appearance: none;
-  width: 2rem;
+  width: 2.4rem;
   aspect-ratio: 1;
   padding: 0;
   border: none;
   box-shadow: inset 0 0 0 2px var(--clr-accent);
   border-radius: 50%;
-  background-color: var(--clr-text-grey);
+  background-color: var(--clr-bg-grey);
   position: relative;
   overflow: hidden;
 }
@@ -526,7 +524,7 @@ fieldset .check-radio-box input::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--clr-text-grey);
+  color: var(--clr-bg-white);
   background: var(--gradient-main);
 }
 
@@ -566,7 +564,7 @@ fieldset label {
   order: 1;
 }
 
-fieldset :is(input, textarea, select, .check-radio-box) {
+fieldset :is(.text-input, .check-radio-box) {
   order: 2;
 }
 

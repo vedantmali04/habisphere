@@ -96,3 +96,39 @@ if (!currentUser) {
         window.location.href = "./signup.html";
     }
 }
+
+
+/* ///////////////
+INPUT VALIDATION
+/////////////// */
+
+function validateInput(inputTag) {
+    let pattern = new RegExp(inputTag.pattern);
+
+    if (pattern == /(?:)/) {
+        let value = inputTag.value;
+        return true;
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    let allInputs = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
+    let allToggleInputs = this.querySelectorAll("input[type=radio], input[type=checkbox]");
+
+
+    allInputs.forEach(input => {
+        input.classList.add("text-input");
+        input.classList.add(input.value ? "filled" : undefined);
+
+        input.addEventListener("blur", function () {
+            input.classList.toggle("filled", input.value)
+        })
+    })
+
+    allToggleInputs.forEach(input => {
+        input.classList.add("toggle-input");
+    })
+
+});

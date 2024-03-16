@@ -9,6 +9,8 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./style/index.css">
     <link rel="stylesheet" href="./style/onboard.css">
+
+    <link rel="shortcut icon" href="assets/logo/logo.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -451,8 +453,8 @@
                     <!-- Full Name -->
                     <fieldset>
                         <label for="signup_fullname">Full Name</label>
-                        <input type="text" id="signup_fullname" name="signup_fullname" autocomplete="name" autofocus
-                            pattern="^[A-Z][a-z]{2,}(?: [A-Z][a-z]{2,}){1}$">
+                        <input value="Meow" type="text" id="signup_fullname" name="signup_fullname" autocomplete="name"
+                            autofocus pattern="^[A-Z][a-z]{2,}(?: [A-Z][a-z]{2,}){1}$">
                     </fieldset>
 
                     <!-- Username -->
@@ -469,11 +471,28 @@
                             pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                     </fieldset>
 
+
                     <fieldset>
-                        <button class="primary" type="button">Next <i class="bi bi-arrow-right"></i></button>
+                        <button class="primary" type="button" id="signup_next" name="signup_next">Continue <i
+                                class="bi bi-arrow-right"></i></button>
+                    </fieldset>
+
+                    <!-- Terms and Conditions -->
+                    <fieldset>
+                        <div class="check-radio-box">
+                            <label for="signup_t_and_p">
+                                <input type="checkbox" name="signup_t_and_p" id="signup_t_and_p" checked>
+                                <p class="fs-200" style="text-transform: none;">
+                                    I have read and agree to the <a href="#">Terms & Conditions</a> and <a
+                                        href="#">Privacy
+                                        Policy</a>.
+                                </p>
+                            </label>
+                        </div>
                     </fieldset>
 
                     <p>Already have an account? <a href="./login.html">Log in</a></p>
+
 
                 </section>
                 <!-- FORM STEP 1 ENDS -->
