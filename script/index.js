@@ -9,6 +9,8 @@ const userJSON = {
     name: "Vedant",
 }
 
+const ERROR = -1, TIP = 0, SUCESS = 1;
+
 
 /* ///////////////
 HELPER FUNCTIONS
@@ -97,20 +99,73 @@ if (!currentUser) {
     }
 }
 
+// DOM Traversal
+
+// Function to search parents of a element
+function getParentElement(element, targetParent) {
+    let parent = element.parentNode;
+    return parent.tagName.toUpperCase() == targetParent.toUpperCase()
+        ? parent
+        : getParentElement(parent, targetParent);
+}
+
 
 /* ///////////////
 INPUT VALIDATION
 /////////////// */
 
-function validateInput(inputTag) {
-    let pattern = new RegExp(inputTag.pattern);
+function setInputMsg(inputTag, msg, type = ERROR) {
+    const fieldset = getParentElement(inputTag, "fieldset");
 
-    if (pattern == /(?:)/) {
-        let value = inputTag.value;
-        return true;
+    let className = "error";
+    switch (type) {
+        case TIP:
+            className = "tip";
+            break;
+
+        case SUCESS:
+            className = "success";
+            break;
+
+        default:
+            break;
     }
+
+    const errorDiv = document.createElement("div");
+    errorDiv.classList.add("msg", "error");
+    errorDiv.textContent = inputTag.value ? msg : "This field is required.";
+    fieldset.append(errorDiv);
+
 }
 
+function removeInputMsg(inputTag, type = ERROR) {
+    let className = "error";
+    switch (type) {
+        case TIP:
+            className = "tip";
+            break;
+
+        case SUCESS:
+            className = "success";
+            break;
+
+        default:
+            break;
+    }
+    const fieldset = getParentElement(inputTag, "fieldset");
+    fieldset.querySelectorAll("." + className).forEach(div => div.remove());
+}
+
+function validateInput(inputTag, errorMsg) {
+    removeInputMsg(inputTag);
+
+    const pattern = inputTag.pattern?.trim();
+    if (!pattern || new RegExp(pattern).test(inputTag.value.trim())) return true;
+
+    setInputMsg(inputTag, errorMsg);
+
+    return false;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 

@@ -34,7 +34,7 @@ main > section {
 
 .inner-form-sec {
   width: 100%;
-  padding: 4rem 1.6rem;
+  padding: 8rem 1.6rem;
 }
 
 .inner-form-sec .form-step {
@@ -66,6 +66,7 @@ main > section {
 
   .inner-form-sec {
     width: 50%;
+    padding: 4rem 1.6rem;
     margin-left: auto;
   }
 

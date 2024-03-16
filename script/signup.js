@@ -9,8 +9,9 @@ let nextBtn = document.getElementById("signup_next");
 nextBtn.addEventListener("click", function (e) {
     e.preventDefault();
 
-    validateInput(fullNameInput);
-})
+    let validationArray = [];
 
-
-nextBtn.click();
+    validationArray.push(validateInput(fullNameInput, "Must be first, middle (optional) and last name."));
+    validationArray.push(validateInput(usernameInput, "Choose a valid username"));
+    validationArray.push(validateInput(emailInput, "Enter a valid email address."));
+});

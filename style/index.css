@@ -27,9 +27,9 @@ IMPORTS and SETUPS
 
   --gradient-main: linear-gradient(4deg, #d02964 0%, #fc8f59 100%);
 
-  --clr-error: #e74c3c;
-  --clr-success: #3df568;
-  --clr-tip: #4dcfe8;
+  --clr-error: #e61700;
+  --clr-success: #00af1b;
+  --clr-tip: #00aaff;
 
   /* Font-Sizes */
   --fs-100: 1rem;
@@ -538,24 +538,35 @@ fieldset .check-radio-box input[type="checkbox"] {
 
 fieldset .msg {
   justify-content: start;
+  text-align: start;
   position: relative;
-  font-size: var(--fs-200);
+  font-size: var(--fs-300);
   color: var(--clr-text-grey);
+  margin: 0.2rem 0;
 }
 
-fieldset .msg.error::before {
-  content: "\F333";
+fieldset .msg.error {
   color: var(--clr-error);
 }
 
-fieldset .msg.success::before {
-  content: "\F272";
+fieldset .msg.success {
   color: var(--clr-success);
 }
 
-fieldset .msg.tip::before {
-  content: "\F46B";
+fieldset .msg.tip {
   color: var(--clr-tip);
+}
+
+fieldset .msg.error::before {
+  content: "\F332";
+}
+
+fieldset .msg.success::before {
+  content: "\F26A";
+}
+
+fieldset .msg.tip::before {
+  content: "\F468";
 }
 
 /* ORDER TO EACH OF THE ELEMENT OF A INPUT */
@@ -614,7 +625,6 @@ UTILITY CLASSES
 .center,
 .center-mob {
   text-align: center;
-  text-wrap: balance;
   margin: auto;
   width: fit-content;
 }
@@ -628,7 +638,6 @@ UTILITY CLASSES
 
   .center-desk {
     text-align: center;
-    text-wrap: balance;
     margin: auto;
     width: fit-content;
   }
