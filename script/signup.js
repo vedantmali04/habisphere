@@ -14,4 +14,10 @@ nextBtn.addEventListener("click", function (e) {
     validationArray.push(validateInput(fullNameInput, "Must be first, middle (optional) and last name."));
     validationArray.push(validateInput(usernameInput, "Choose a valid username"));
     validationArray.push(validateInput(emailInput, "Enter a valid email address."));
+
+    if (!validationArray.includes(false)) {
+
+
+
+    }
 });

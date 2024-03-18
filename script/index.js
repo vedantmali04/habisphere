@@ -167,6 +167,13 @@ function validateInput(inputTag, errorMsg) {
     return false;
 }
 
+
+
+
+/* ///////////////
+ON DOCUMENT CONTENT LOADED
+/////////////// */
+
 document.addEventListener("DOMContentLoaded", function () {
 
     let allInputs = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
