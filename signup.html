@@ -442,33 +442,35 @@
             </picture>
 
             <!-- SIGNUP FORM STARTS -->
-            <form class="inner-form-sec">
+            <form class="inner-form-sec" id="signup_form">
 
                 <!-- FORM STEP 1 STARTS -->
-                <section class="form-step center-mob">
+                <section class="form-step center-mob" id="form_step_1">
 
                     <h1 class="fs-800">Get Started</h1>
                     <p class="subtitle center-mob">Create your free Habisphere Account now.</p>
+
+                    <p>Already have an account? <a href="./login.html">Log in</a></p>
 
                     <!-- Full Name -->
                     <fieldset>
                         <label for="signup_fullname">Full Name</label>
                         <input type="text" id="signup_fullname" name="signup_fullname" autocomplete="name" autofocus
-                            pattern="([A-Za-z]+){2,}\s+([A-Za-z]+)(?:\s+([A-Za-z]+){2,})?$"
+                            required pattern="([A-Za-z]+){2,}\s+([A-Za-z]+)(?:\s+([A-Za-z]+){2,})?$"
                             style="text-transform: capitalize;">
                     </fieldset>
 
                     <!-- Username -->
                     <fieldset>
                         <label for="signup_username">Choose Username</label>
-                        <input type="text" id="signup_username" name="signup_username" autocomplete="username"
+                        <input type="text" id="signup_username" name="signup_username" autocomplete="username" required
                             pattern="^[a-zA-Z][a-zA-Z0-9_]{4,19}$" style="text-transform: lowercase;">
                     </fieldset>
 
                     <!-- Email -->
                     <fieldset>
                         <label for="signup_email">Email</label>
-                        <input type="email" id="signup_email" name="signup_email" autocomplete="email"
+                        <input type="email" id="signup_email" name="signup_email" autocomplete="email" required
                             pattern="^([a-zA-Z0-9._%\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})$">
                     </fieldset>
 
@@ -477,24 +479,24 @@
                                 class="bi bi-arrow-right"></i></button>
                     </fieldset>
 
-                    <!-- Terms and Conditions -->
-                    <fieldset>
-                        <div class="check-radio-box">
-                            <label for="signup_t_and_p">
-                                <input type="checkbox" name="signup_t_and_p" id="signup_t_and_p" checked>
-                                <p class="fs-200" style="text-transform: none;">
-                                    I accept the <a href="#">Terms</a> and <a href="#">Privacy
-                                        Policy</a>.
-                                </p>
-                            </label>
-                        </div>
-                    </fieldset>
 
-                    <p>Already have an account? <a href="./login.html">Log in</a></p>
+                    <!-- Terms and Conditions -->
+                    <p class="fs-200" style="text-transform: none;">
+                        By siging up, I accept the <a href="#">Terms</a> and <a href="#">Privacy
+                            Policy</a>.
+                    </p>
 
 
                 </section>
                 <!-- FORM STEP 1 ENDS -->
+
+                <!-- FORM STEP 2 STARTS -->
+
+                <section class="form-step center-mob" id="form_step_2">
+                    <button type="button" class="text" id="signup_back"><i class="bi bi-arrow-left"></i> Back</button>
+                </section>
+
+                <!-- FORM STEP 2 ENDS -->
 
             </form>
             <!-- SIGNUP FORM ENDS -->

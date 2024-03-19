@@ -34,11 +34,32 @@ main > section {
 
 .inner-form-sec {
   width: 100%;
-  padding: 8rem 1.6rem;
+  height: 100%;
+  position: relative;
 }
 
 .inner-form-sec .form-step {
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  position: absolute;
+  padding: 8rem 1.6rem;
+  top: 0;
+  left: 0;
+}
+
+.inner-form-sec #form_step_2,
+.inner-form-sec.step-2 #form_step_1 {
+  left: -3rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.inner-form-sec #form_step_1,
+.inner-form-sec.step-2 #form_step_2 {
+  left: 0;
+  opacity: 1;
+  visibility: visible;
 }
 
 .inner-form-sec fieldset {
@@ -66,8 +87,11 @@ main > section {
 
   .inner-form-sec {
     width: 50%;
-    padding: 4rem 1.6rem;
     margin-left: auto;
+  }
+
+  .inner-form-sec .form-step {
+    padding: 4rem 1.6rem;
   }
 
   .inner-form-sec fieldset {
@@ -75,6 +99,14 @@ main > section {
     margin-right: 0;
   }
 }
+
+/* #form_step_1.hidden {
+  translate: -2rem 0;
+}
+
+#form_step_2 {
+  translate: ;
+} */
 
 /* /////////////////////////
 DECORATIONS, ILLUSTRATIONS and ANIMATIONS

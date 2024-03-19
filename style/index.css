@@ -336,10 +336,9 @@ button.text {
 }
 
 button.text:hover,
-button.text:hover a {
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+button.text:hover a,
+button.text:hover :not(> i) {
+  color: var(--clr-primary-dark);
 }
 
 button.text:active {

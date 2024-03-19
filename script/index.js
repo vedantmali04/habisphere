@@ -4,12 +4,20 @@ CONSTANTS DEFINITIONS
 
 // Database
 const KEY_USER = "users";
+const KEY_TAKEN_IDS = "takenIDs";
 
 const userJSON = {
     name: "Vedant",
 }
 
+// Input Status
 const ERROR = -1, TIP = 0, SUCESS = 1;
+
+// User Data Constants
+const THEME = {
+    light: 1,
+    dark: 2
+}
 
 
 /* ///////////////
@@ -42,8 +50,7 @@ function getFromStorage(key) {
 
         // Retrieve data
         const storedData = localStorage.getItem(key);
-        console.log(storedData);
-        if (!storedData || storedData == "{}" || storedData == "[]") {
+        if (!storedData) {
             throw new Error("Key not found");
         }
 
@@ -52,9 +59,12 @@ function getFromStorage(key) {
         return parsedData;
 
     } catch (error) {
-        console.error("Error retrieving from storage:", error);
         return null;
     }
+}
+
+if (getFromStorage(KEY_TAKEN_IDS) == null) {
+    saveToStorage(KEY_TAKEN_IDS, []);
 }
 
 // OTHER MISCELLANEOUS FUNCTIONS
@@ -110,11 +120,69 @@ function getParentElement(element, targetParent) {
 }
 
 
+
+/* ///////////////
+CLASSES, OBJECTS, USER, HABITS, etc. CODE
+/////////////// */
+
+
+// Function to generate uniqueIDs
+function generateUniqueID(prefix = "") {
+    let idArray = getFromStorage(KEY_TAKEN_IDS);
+
+    while (true) {
+        let uid = prefix + Date.now().toString().slice(-9);
+        if (!idArray.includes(uid)) {
+            idArray.push(uid);
+            saveToStorage(KEY_TAKEN_IDS, idArray);
+            return uid;
+        }
+    }
+}
+
+
+// Class settings has User settings
+class Settings {
+    theme = THEME.light;
+    animations = true;
+    dashboard = {
+        tasks: true,
+        journal: true,
+        quote: true
+    };
+}
+
+
+class User extends Settings {
+    user_id;
+    full_name;
+    username;
+    email;
+    password;
+    bio;
+    avatar;
+    created_time;
+
+    constructor(full_name, username, email, password) {
+        this.user_id = generateUniqueID("uid");
+        this.full_name = full_name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.bio = "";
+        this.avatar = "";
+        this.created_time = Date.now();
+    }
+}
+
 /* ///////////////
 INPUT VALIDATION
 /////////////// */
 
+// Function to set error Input message
 function setInputMsg(inputTag, msg, type = ERROR) {
+    removeInputMsg(inputTag);
+
     const fieldset = getParentElement(inputTag, "fieldset");
 
     let className = "error";
@@ -133,11 +201,11 @@ function setInputMsg(inputTag, msg, type = ERROR) {
 
     const errorDiv = document.createElement("div");
     errorDiv.classList.add("msg", "error");
-    errorDiv.textContent = inputTag.value ? msg : "This field is required.";
+    errorDiv.textContent = msg;
     fieldset.append(errorDiv);
-
 }
 
+// Function to remove error Input message
 function removeInputMsg(inputTag, type = ERROR) {
     let className = "error";
     switch (type) {
@@ -156,17 +224,35 @@ function removeInputMsg(inputTag, type = ERROR) {
     fieldset.querySelectorAll("." + className).forEach(div => div.remove());
 }
 
+// Function to validate input tags
 function validateInput(inputTag, errorMsg) {
-    removeInputMsg(inputTag);
+    if (inputTag.required && !inputTag.value) {
+        setInputMsg(inputTag, "This field is required");
+        return false;
+    }
 
     const pattern = inputTag.pattern?.trim();
     if (!pattern || new RegExp(pattern).test(inputTag.value.trim())) return true;
 
     setInputMsg(inputTag, errorMsg);
-
     return false;
 }
 
+function validateToggleInputs(toggleInputs, msg = "This field is required") {
+    let validationArray = [];
+    toggleInputs.forEach(input => {
+        if (input.required && !input.checked) {
+            validationArray.push(false);
+        }
+    })
+
+    if (validationArray.includes(false)) {
+        setInputMsg(toggleInputs[0], msg);
+        return false;
+    }
+
+    return true;
+}
 
 
 
