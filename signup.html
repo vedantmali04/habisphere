@@ -450,8 +450,6 @@
                     <h1 class="fs-800">Get Started</h1>
                     <p class="subtitle center-mob">Create your free Habisphere Account now.</p>
 
-                    <p>Already have an account? <a href="./login.html">Log in</a></p>
-
                     <!-- Full Name -->
                     <fieldset>
                         <label for="signup_fullname">Full Name</label>
@@ -474,6 +472,7 @@
                             pattern="^([a-zA-Z0-9._%\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})$">
                     </fieldset>
 
+                    <!-- Next / Continue Button -->
                     <fieldset>
                         <button class="primary" type="button" id="signup_next" name="signup_next">Continue <i
                                 class="bi bi-arrow-right"></i></button>
@@ -481,19 +480,56 @@
 
 
                     <!-- Terms and Conditions -->
-                    <p class="fs-200" style="text-transform: none;">
+                    <p class="fs-200 center-mob" style="text-transform: none;">
                         By siging up, I accept the <a href="#">Terms</a> and <a href="#">Privacy
                             Policy</a>.
                     </p>
+
+                    <p class="center-mob" style="margin-top: 2.4rem;">Already have an account? <a
+                            href="./login.html">Log in</a></p>
+
 
 
                 </section>
                 <!-- FORM STEP 1 ENDS -->
 
                 <!-- FORM STEP 2 STARTS -->
-
                 <section class="form-step center-mob" id="form_step_2">
+                    <!-- Back Button -->
                     <button type="button" class="text" id="signup_back"><i class="bi bi-arrow-left"></i> Back</button>
+
+                    <h2 class="fs-700">Create Password</h2>
+
+                    <!-- Create Password -->
+                    <fieldset>
+                        <label for="signup_create_password">Create Password</label>
+                        <input type="text" id="signup_create_password" name="signup_create_password"
+                            autocomplete="new-password" required
+                            pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
+                    </fieldset>
+
+                    <div class="subtitle note center-mob">
+                        <span>
+                            <p>A password must be 7 to 16 characters long. It must contain - </p>
+                            <p>At least one lowercase alphabet</p>
+                            <p>At least one uppercase alphabet</p>
+                            <p>At least one number and symbol</p>
+                            <p>Password must not contain spaces.</p>
+                        </span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <fieldset>
+                        <label for="signup_confirm_password">Confirm Password</label>
+                        <input type="password" id="signup_confirm_password" name="signup_confirm_password" required>
+                    </fieldset>
+
+                    <!-- Sign Up Button -->
+                    <fieldset>
+                        <button class="primary" type="button" id="signup_signup" name="signup_signup">Sign up <i
+                                class="bi bi-arrow-right"></i></button>
+                    </fieldset>
+
                 </section>
 
                 <!-- FORM STEP 2 ENDS -->
