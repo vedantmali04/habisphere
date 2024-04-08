@@ -232,7 +232,10 @@ function validateInput(inputTag, errorMsg) {
     }
 
     const pattern = inputTag.pattern?.trim();
-    if (!pattern || new RegExp(pattern).test(inputTag.value.trim())) return true;
+    if (!pattern || new RegExp(pattern).test(inputTag.value.trim())) {
+        removeInputMsg(inputTag);
+        return true
+    };
 
     setInputMsg(inputTag, errorMsg);
     return false;
@@ -254,6 +257,11 @@ function validateToggleInputs(toggleInputs, msg = "This field is required") {
     return true;
 }
 
+// Function to set a input value or set it to "" if not specified
+function setInputValue(inputTag, value = "") {
+    inputTag.classList.toggle("filled", value !== "");
+    inputTag.value = value;
+}
 
 
 /* ///////////////
@@ -264,7 +272,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let allInputs = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
     let allToggleInputs = this.querySelectorAll("input[type=radio], input[type=checkbox]");
-
 
     allInputs.forEach(input => {
         input.classList.add("text-input");
