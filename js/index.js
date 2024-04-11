@@ -4,11 +4,8 @@ CONSTANTS DEFINITIONS
 
 // Database
 const KEY_USER = "users";
-const KEY_TAKEN_IDS = "takenIDs";
-
-const userJSON = {
-    name: "Vedant",
-}
+const KEY_TAKEN_UIDS = "taken_UIDs";
+const KEY_CURRENT_USER = "current_user"
 
 // Input Status
 const ERROR = -1, TIP = 0, SUCESS = 1;
@@ -63,8 +60,18 @@ function getFromStorage(key) {
     }
 }
 
-if (getFromStorage(KEY_TAKEN_IDS) == null) {
-    saveToStorage(KEY_TAKEN_IDS, []);
+// If User Arrays are not created in the Application
+
+if (getFromStorage(KEY_TAKEN_UIDS) == null) {
+    saveToStorage(KEY_TAKEN_UIDS, []);
+}
+
+if (getFromStorage(KEY_USER) == null) {
+    saveToStorage(KEY_USER, []);
+}
+
+if (getFromStorage(KEY_CURRENT_USER) == null) {
+    saveToStorage(KEY_CURRENT_USER, []);
 }
 
 // OTHER MISCELLANEOUS FUNCTIONS
@@ -99,11 +106,10 @@ function getCurrentFileName() {
 
 
 // Checking if the user is logged in.
-// currentUser = getFromStorage("current_user");
-let currentUser = undefined;
+let currentUser = getFromStorage(KEY_CURRENT_USER);
 let currentFileName = getCurrentFileName();
 
-if (!currentUser) {
+if (currentUser == []) {
     if (!["signup.html", "login.html"].includes(currentFileName)) {
         window.location.href = "./signup.html";
     }
@@ -128,13 +134,12 @@ CLASSES, OBJECTS, USER, HABITS, etc. CODE
 
 // Function to generate uniqueIDs
 function generateUniqueID(prefix = "") {
-    let idArray = getFromStorage(KEY_TAKEN_IDS);
+    let idArray = getFromStorage(KEY_TAKEN_UIDS);
 
     while (true) {
         let uid = prefix + Date.now().toString().slice(-9);
         if (!idArray.includes(uid)) {
             idArray.push(uid);
-            saveToStorage(KEY_TAKEN_IDS, idArray);
             return uid;
         }
     }
@@ -163,15 +168,37 @@ class User extends Settings {
     avatar;
     created_time;
 
-    constructor(full_name, username, email, password) {
+    constructor(full_name, username, email) {
+        super();
         this.user_id = generateUniqueID("uid");
         this.full_name = full_name;
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.password = "";
         this.bio = "";
         this.avatar = "";
         this.created_time = Date.now();
+    }
+
+    setPassword(password) {
+        this.password = password;
+    }
+
+    // Function to save new user to storage
+    saveNewUser() {
+        let userArray = getFromStorage(KEY_USER);
+        userArray.push(this);
+        saveToStorage(KEY_USER, userArray);
+    }
+
+    // Check if user already exists
+    getUserBasedOnKey(key, value) {
+        let userArray = getFromStorage(KEY_USER);
+        let foundUser = null;
+        userArray.forEach(user => {
+            if (user[key] == value) foundUser = user;
+        })
+        return foundUser;
     }
 }
 
@@ -201,7 +228,7 @@ function setInputMsg(inputTag, msg, type = ERROR) {
 
     const errorDiv = document.createElement("div");
     errorDiv.classList.add("msg", "error");
-    errorDiv.textContent = msg;
+    errorDiv.innerHTML = `<span>${msg}</span>`;
     fieldset.append(errorDiv);
 }
 
@@ -275,15 +302,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     allInputs.forEach(input => {
         input.classList.add("text-input");
-        input.classList.add(input.value ? "filled" : undefined);
+        input.classList.add(input.value ? "filled" : "unfilled");
 
         input.addEventListener("blur", function () {
             input.classList.toggle("filled", input.value)
-        })
+        });
     })
 
     allToggleInputs.forEach(input => {
         input.classList.add("toggle-input");
     })
-
 });
