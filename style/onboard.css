@@ -8,7 +8,7 @@ main > section {
   height: 100%;
 }
 
-.get-started-sec.illus-sec {
+.onboard-illus-sec.illus-sec {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -18,7 +18,7 @@ main > section {
   visibility: hidden;
 }
 
-.illus-sec .illus {
+.illus-sec .signup-meditation.illus {
   height: 30rem;
 }
 
@@ -41,6 +41,7 @@ main > section {
 .inner-form-sec .form-step {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   padding: 8rem 1.6rem;
@@ -73,12 +74,31 @@ main > section {
 }
 
 @media (min-width: 769px) {
-  .get-started-sec.illus-sec.illus-sec {
+  .onboard-illus-sec.illus-sec {
     width: 50%;
     padding: 4.8rem 1.6rem;
     z-index: -1;
     opacity: 1;
     visibility: visible;
+  }
+
+  .onboard-illus-sec.illus-sec:has(.login-pattern) {
+    height: 100%;
+    padding: 0;
+  }
+
+  .login-pattern {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    padding: 0 4.2rem;
+  }
+
+  .login-pattern img {
+    width: 90%;
+    object-fit: cover;
   }
 
   .illus-sec p {
@@ -90,8 +110,9 @@ main > section {
     margin-left: auto;
   }
 
+  
   .inner-form-sec .form-step {
-    padding: 4rem 1.6rem;
+    padding: 8rem 1.6rem;
   }
 
   .inner-form-sec fieldset {
@@ -100,19 +121,11 @@ main > section {
   }
 }
 
-/* #form_step_1.hidden {
-  translate: -2rem 0;
-}
-
-#form_step_2 {
-  translate: ;
-} */
-
 /* /////////////////////////
 DECORATIONS, ILLUSTRATIONS and ANIMATIONS
 ///////////////////////// */
 
-.signup-leaves {
+.leaves {
   position: absolute;
   top: -2rem;
   right: -3rem;

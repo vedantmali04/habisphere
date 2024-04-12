@@ -15,48 +15,66 @@
 
     <main>
 
-        <section class="illus-sec get-started-sec">
+        <section class="illus-sec onboard-illus-sec">
             <picture class="login-pattern illus">
-                <img src="./assets/illus/login-pattern.svg" alt="Welcome Back">
+                <img src="./assets/illus/login-pattern.png" alt="💖">
             </picture>
-
         </section>
 
         <section class="form-sec">
-            <!-- Leaves Illustration -->
-            <picture class="signup-leaves illus">
-                <img src="./assets/illus/leaf-8.svg">
-            </picture>
 
-            <!-- SIGNUP FORM STARTS -->
-            <form class="inner-form-sec">
+            <!-- login FORM STARTS -->
+            <form class="inner-form-sec" id="login_form">
 
-                <!-- FORM STEP 1 STARTS -->
+                <!-- FORM STEP STARTS -->
                 <section class="form-step center-mob">
-                    
-                    <h1 class="fs-800">Hello again!</h1>
+                    <!-- Leaves Illustration -->
+                    <picture class="leaves illus">
+                        <img src="./assets/illus/leaf-8.svg">
+                    </picture>
+
+                    <h1 class="fs-800">Hello Again!</h1>
                     <p class="subtitle center-mob">Pick up where you left off.</p>
-                    
-                               
+
+                    <!-- ID - Username or Email -->
                     <fieldset>
-                        <button class="primary" type="submit">Login</button>
+                        <label for="login_id">Username or Email</label>
+                        <input type="text" id="login_id" name="login_id" autocomplete="username, email" required>
                     </fieldset>
 
-                    <p>Don't have a Account? <a href="./signup.html">Create for Free</a></p>
+                    <!-- Password -->
+                    <fieldset>
+                        <label for="login_password">Password</label>
+                        <input type="password" id="login_password" name="login_password" autocomplete="current-password"
+                            required>
+                    </fieldset>
+
+                    <!-- Login Button -->
+                    <fieldset>
+                        <button class="primary" type="button" id="login_login" name="login_login">Login <i
+                                class="bi bi-arrow-right"></i></button>
+                    </fieldset>
+
+                    <p class="center-mob" style="margin-top: 2.4rem;">Don't have a account? <a
+                            href="./signup.html">Create Account</a>.</p>
+
+
+
                 </section>
-                <!-- FORM STEP 1 ENDS -->
+                <!-- FORM STEP ENDS -->
 
             </form>
-            <!-- SIGNUP FORM ENDS -->
-            
-            
+            <!-- login FORM ENDS -->
+
+
         </section>
-        
+
     </main>
-    
-    
-    
+
+
+
     <script src="./js/index.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 
 </html>

@@ -52,58 +52,57 @@ nextBtn.addEventListener("click", function (e) {
     }
 });
 
+// From Password Step to Details Step
 backBtn.addEventListener("click", function (e) {
     e.preventDefault();
     form.classList.remove("step-2");
 });
 
-
+// Signup Button Press
 signupBtn.addEventListener("click", function (e) {
     e.preventDefault();
 
+    // Remove older error messages
     removeInputMsg(createPasswordInput);
     removeInputMsg(confirmPasswordInput);
 
+    // If password and email is the same
     if (createPasswordInput.value == emailInput.value) {
         setInputMsg(createPasswordInput, "Email and Password must not be same.")
     }
 
+    // If password doesn't satisfy the conditions
     if (!validateInput(createPasswordInput, "Please choose a strong password.")) return;
 
+    // If Created password and Confirmed password aren't same
     if (confirmPasswordInput.value != createPasswordInput.value) {
         setInputMsg(confirmPasswordInput, "Password doesn't match.");
         return;
     }
 
-    validationArray = [];
-
-    if (newUser.getUserBasedOnKey("username", usernameInput.value)) {
-        setInputMsg(usernameInput, "This username is already taken");
-        validationArray.push(false);
-        backBtn.click();
-    }
-    if (newUser.getUserBasedOnKey("email", emailInput.value)) {
-        setInputMsg(emailInput, `Account with this email already exists. Use a different email or <a href=\"./login.html\">login instead</a>`);
-        validationArray.push(false);
-        backBtn.click();
+    // If name, username, email is changed after nextBtn is pressed from the Inspect
+    if (fullNameInput.value != newUser.full_name
+        || usernameInput.value != newUser.username
+        || emailInput.value != newUser.email) {
+        alert("Something went wrong.");
+        window.location.reload();
     }
 
-    if (!validationArray.includes(false)) {
-        // Set the created password
-        newUser.setPassword(createPasswordInput.value);
 
-        // Save created user to the storage
-        newUser.saveNewUser();
+    // Set the created password
+    newUser.setPassword(createPasswordInput.value);
 
-        // Add the unique user ID of the new user to the taken_UIDs
-        let userIDs = getFromStorage(KEY_TAKEN_UIDS);
-        userIDs.push(newUser.user_id);
-        saveToStorage(KEY_TAKEN_UIDS, userIDs);
+    // Save created user to the storage
+    newUser.saveNewUser();
 
-        // Disable the signup button and navigate to the dashboard
-        signupBtn.disabled = true;
-        saveToStorage(KEY_CURRENT_USER, [newUser]);
-        window.location.href = "./index.html";
-    }
+    // Add the unique user ID of the new user to the taken_UIDs
+    let userIDs = getFromStorage(KEY_TAKEN_UIDS);
+    userIDs.push(newUser.user_id);
+    saveToStorage(KEY_TAKEN_UIDS, userIDs);
+
+    // Disable the signup button and navigate to the dashboard
+    signupBtn.disabled = true;
+    saveToStorage(KEY_CURRENT_USER, [newUser]);
+    window.location.href = "./index.html";
 
 });

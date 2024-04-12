@@ -1,3 +1,5 @@
+"use strict"
+
 /* ///////////////
 CONSTANTS DEFINITIONS
 /////////////// */
@@ -21,7 +23,7 @@ const THEME = {
 HELPER FUNCTIONS
 /////////////// */
 
-// FUNCTIONS to Handle Database
+// FUNCTIONS to Handle Data Storage
 
 // FUNCTION to save data to storage throughout the project
 function saveToStorage(key, data) {
@@ -34,7 +36,7 @@ function saveToStorage(key, data) {
         localStorage.setItem(key, serializedData);
 
     } catch (error) {
-        console.error("Error saving to storage:", error);
+        return null;
     }
 }
 
@@ -60,8 +62,7 @@ function getFromStorage(key) {
     }
 }
 
-// If User Arrays are not created in the Application
-
+// If Keys are not created in the Local Storages
 if (getFromStorage(KEY_TAKEN_UIDS) == null) {
     saveToStorage(KEY_TAKEN_UIDS, []);
 }
@@ -74,8 +75,11 @@ if (getFromStorage(KEY_CURRENT_USER) == null) {
     saveToStorage(KEY_CURRENT_USER, []);
 }
 
-// OTHER MISCELLANEOUS FUNCTIONS
+/* ///////////////
+CHECK IF USER IS LOGGED IN, if not, redirect to login page
+/////////////// */
 
+// Function to get html page name
 function getCurrentFileName() {
     // Get the last part
     let fileName = window.location.href
@@ -109,13 +113,21 @@ function getCurrentFileName() {
 let currentUser = getFromStorage(KEY_CURRENT_USER);
 let currentFileName = getCurrentFileName();
 
-if (currentUser == []) {
+// If not logged in, redirect to login page
+if (currentUser.length == 0) {
     if (!["signup.html", "login.html"].includes(currentFileName)) {
-        window.location.href = "./signup.html";
+        window.location.href = "./login.html";
+    }
+} else {
+    // If logged in and still trying to access signup and login page
+    if (["signup.html", "login.html"].includes(currentFileName)) {
+        window.location.href = "./index.html";
     }
 }
 
-// DOM Traversal
+/* ///////////////
+DOM Traversal
+/////////////// */
 
 // Function to search parents of a element
 function getParentElement(element, targetParent) {
@@ -146,7 +158,7 @@ function generateUniqueID(prefix = "") {
 }
 
 
-// Class settings has User settings
+// Class Settings has user settings
 class Settings {
     theme = THEME.light;
     animations = true;
@@ -157,7 +169,7 @@ class Settings {
     };
 }
 
-
+// Class User has user data
 class User extends Settings {
     user_id;
     full_name;
@@ -180,6 +192,7 @@ class User extends Settings {
         this.created_time = Date.now();
     }
 
+    // Update password
     setPassword(password) {
         this.password = password;
     }
@@ -210,8 +223,9 @@ INPUT VALIDATION
 function setInputMsg(inputTag, msg, type = ERROR) {
     removeInputMsg(inputTag);
 
-    const fieldset = getParentElement(inputTag, "fieldset");
-
+    // Create message div
+    const msgDiv = document.createElement("div");
+    // Set class, by default, it's "error"
     let className = "error";
     switch (type) {
         case TIP:
@@ -225,15 +239,18 @@ function setInputMsg(inputTag, msg, type = ERROR) {
         default:
             break;
     }
+    msgDiv.classList.add("msg", className);
+    msgDiv.innerHTML = `<span>${msg}</span>`;
 
-    const errorDiv = document.createElement("div");
-    errorDiv.classList.add("msg", "error");
-    errorDiv.innerHTML = `<span>${msg}</span>`;
-    fieldset.append(errorDiv);
+    // Find parent for appending
+    const fieldset = getParentElement(inputTag, "fieldset");
+    fieldset.append(msgDiv);
 }
 
 // Function to remove error Input message
 function removeInputMsg(inputTag, type = ERROR) {
+    const fieldset = getParentElement(inputTag, "fieldset");
+    // Get type of msg to be deleted, by default, "error"
     let className = "error";
     switch (type) {
         case TIP:
@@ -247,12 +264,12 @@ function removeInputMsg(inputTag, type = ERROR) {
         default:
             break;
     }
-    const fieldset = getParentElement(inputTag, "fieldset");
     fieldset.querySelectorAll("." + className).forEach(div => div.remove());
 }
 
 // Function to validate input tags
 function validateInput(inputTag, errorMsg) {
+    inputTag.value = inputTag.value.trim();
     if (inputTag.required && !inputTag.value) {
         setInputMsg(inputTag, "This field is required");
         return false;
