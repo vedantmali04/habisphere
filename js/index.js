@@ -32,6 +32,8 @@ function saveToStorage(key, data) {
             throw new Error("Invalid key: Key must be a non-empty string.");
         }
 
+        data = data.filter(item => item !== null);
+
         const serializedData = JSON.stringify(data);
         localStorage.setItem(key, serializedData);
 
@@ -180,16 +182,18 @@ class User extends Settings {
     avatar;
     created_time;
 
-    constructor(full_name, username, email) {
+    constructor(full_name = "", username = "", email = "") {
         super();
-        this.user_id = generateUniqueID("uid");
-        this.full_name = full_name;
-        this.username = username;
-        this.email = email;
-        this.password = "";
-        this.bio = "";
-        this.avatar = "";
-        this.created_time = Date.now();
+        if (![full_name, username, email].includes("")) {
+            this.user_id = generateUniqueID("uid");
+            this.full_name = full_name;
+            this.username = username;
+            this.email = email;
+            this.password = "";
+            this.bio = "";
+            this.avatar = "";
+            this.created_time = Date.now();
+        }
     }
 
     // Update password
