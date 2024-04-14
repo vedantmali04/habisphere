@@ -18,6 +18,9 @@ const THEME = {
     dark: 2
 }
 
+// Classes and keys
+const CLASS_FIELDSET = "fieldset";
+
 
 /* ///////////////
 HELPER FUNCTIONS
@@ -247,13 +250,13 @@ function setInputMsg(inputTag, msg, type = ERROR) {
     msgDiv.innerHTML = `<span>${msg}</span>`;
 
     // Find parent for appending
-    const fieldset = getParentElement(inputTag, "fieldset");
+    const fieldset = getParentElement(inputTag, CLASS_FIELDSET);
     fieldset.append(msgDiv);
 }
 
 // Function to remove error Input message
 function removeInputMsg(inputTag, type = ERROR) {
-    const fieldset = getParentElement(inputTag, "fieldset");
+    const fieldset = getParentElement(inputTag, CLASS_FIELDSET);
     // Get type of msg to be deleted, by default, "error"
     let className = "error";
     switch (type) {
@@ -328,9 +331,23 @@ document.addEventListener("DOMContentLoaded", function () {
         input.addEventListener("blur", function () {
             input.classList.toggle("filled", input.value)
         });
+
+        if (input.type == "password") {
+            let showPassBtn = this.createElement("button");
+            showPassBtn.type = "button";
+            showPassBtn.classList.add("show-pass-btn", "trail", "icon");
+            showPassBtn.innerHTML = `<i class="bi bi-eye"></i><i class="bi bi-eye-slash"></i>`;
+            getParentElement(input, CLASS_FIELDSET).append(showPassBtn);
+
+            showPassBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                input.type = input.type == "password" ? "text" : "password";
+                showPassBtn.classList.toggle("show", input.type != "password");
+            })
+        }
     })
 
     allToggleInputs.forEach(input => {
         input.classList.add("toggle-input");
-    })
+    });
 });
