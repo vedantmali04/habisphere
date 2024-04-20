@@ -2,7 +2,7 @@
 Enhance your daily routine with Habisphere - the online Habit Tracker and Task Manager - where productivity meets simplicity. This is a frontend web project, where data is saved and retrieved from the local storage by using it as a database.
 
 ## Live Here
-> [!WARNING]
+> [!NOTE]
 > Under Production [vedantmali05.github.io/habisphere](https://vedantmali05.github.io/habisphere/)
 
 ## Built With
@@ -19,7 +19,7 @@ git clone https://github.com/vedantmali05/habisphere.git
 2. Open the index.html file in your web browser.
 
 # Features 
-> [!WARNING]
+> [!NOTE]
 > Under Production
 - Clean and reponsive web design
 - User Account Management - Sign up, Sign in, Sign out
