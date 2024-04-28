@@ -110,7 +110,6 @@ main > section {
     margin-left: auto;
   }
 
-  
   .inner-form-sec .form-step {
     padding: 8rem 1.6rem;
   }
@@ -190,5 +189,24 @@ DECORATIONS, ILLUSTRATIONS and ANIMATIONS
 
   50% {
     rotate: var(--deg-end);
+  }
+}
+
+.signup-meditation .shadow {
+  animation: shadowScale 8s infinite;
+}
+
+@keyframes shadowScale {
+  0%,
+  100% {
+    translate: 0 0;
+    scale: 1;
+  }
+
+  40%,
+  50%,
+  60% {
+    translate: 60px 90px;
+    scale: 0.9;
   }
 }
