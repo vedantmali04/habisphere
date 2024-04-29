@@ -25,11 +25,24 @@ IMPORTS and SETUPS
   --clr-accent: #018da5;
   --clr-accent-light: #52d2ec;
 
-  --gradient-main: linear-gradient(4deg, #0b9b8a 0%, var(--clr-primary-light) 100%);
+  --gradient-main: linear-gradient(
+    4deg,
+    #0b9b8a 0%,
+    var(--clr-primary-light) 100%
+  );
 
+  /* POP UP and Overlay Color and Shadows */
+  --clr-popup-overlay: #13131466;
+  --clr-popup-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+
+  /* Status Colors */
   --clr-error: #c11300;
   --clr-success: #00af1b;
   --clr-tip: #018da5;
+
+  /* Animation Properties */
+  --animate-smoothness: cubic-bezier(0.2, 0, 0, 1);
 
   /* Font-Sizes */
   --fs-100: 1rem;
@@ -253,11 +266,25 @@ fieldset label,
 fieldset .trail,
 fieldset .msg,
 .note,
-button {
+button,
+.logo {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+}
+
+.logo {
+  justify-content: left;
+}
+
+.logo p {
+  order: 2;
+  font-family: var(--ff-head);
+  font-size: var(--fs-500);
+  background-image: var(--gradient-main);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 /* /////////////////////////
@@ -480,7 +507,7 @@ fieldset select {
 fieldset .trail {
   position: absolute;
   right: 1.2rem;
-  top: .8rem;
+  top: 0.8rem;
   z-index: 11;
   width: 2.8rem;
   aspect-ratio: 1;
@@ -498,7 +525,7 @@ fieldset .show-pass-btn .bi {
   translate: -50% -50%;
 }
 
-fieldset .show-pass-btn .bi-eye-slash, 
+fieldset .show-pass-btn .bi-eye-slash,
 fieldset .show-pass-btn.show .bi-eye {
   opacity: 0;
 }
@@ -665,6 +692,38 @@ fieldset .msg {
 fieldset .check-radio-box label input {
   order: -1;
 }
+
+/* /////////////////////////
+nav DRAWER
+///////////////////////// */
+
+.nav-drawer-holder {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: var(--clr-popup-overlay);
+}
+
+.nav-drawer {
+  position: fixed;
+  height: 100%;
+  width: 80%;
+  max-width: 36rem;
+  background-color: var(--clr-bg-white);
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .8rem;
+}
+
+.nav-drawer .user-info {
+  border: 1px solid;
+  padding: .8rem;
+}
+
 /* /////////////////////////
 UTILITY CLASSES
 ///////////////////////// */
@@ -704,6 +763,10 @@ UTILITY CLASSES
     margin: auto;
     width: fit-content;
   }
+}
+
+.seperator {
+  border-top: 1px solid var(--clr-popup-overlay);
 }
 
 /* /////////////////////////

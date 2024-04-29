@@ -21,6 +21,13 @@ const THEME = {
 // Classes and keys
 const CLASS_FIELDSET = "fieldset";
 
+// Element Sizes 
+const SIZE_XS = "extra-small";
+const SIZE_S = "small";
+const SIZE_M = "medium";
+const SIZE_L = "large";
+const SIZE_XL = "extra-large";
+
 
 /* ///////////////
 HELPER FUNCTIONS
@@ -113,25 +120,8 @@ function getCurrentFileName() {
     return fileName;
 }
 
-
-// Checking if the user is logged in.
-let currentUser = getFromStorage(KEY_CURRENT_USER);
-let currentFileName = getCurrentFileName();
-
-// If not logged in, redirect to login page
-if (currentUser.length == 0) {
-    if (!["signup.html", "login.html"].includes(currentFileName)) {
-        window.location.href = "./login.html";
-    }
-} else {
-    // If logged in and still trying to access signup and login page
-    if (["signup.html", "login.html"].includes(currentFileName)) {
-        window.location.href = "./index.html";
-    }
-}
-
 /* ///////////////
-DOM Traversal
+DOM TRAVERSAL
 /////////////// */
 
 // Function to search parents of a element
@@ -321,10 +311,93 @@ ON DOCUMENT CONTENT LOADED
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    let allInputs = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
-    let allToggleInputs = this.querySelectorAll("input[type=radio], input[type=checkbox]");
+    /* ///////////////
+    IF USER IS NOT LOGGED IN, and still tries to open the system
+    /////////////// */
 
-    allInputs.forEach(input => {
+    // Checking if the user is logged in.
+    let currentUser = getFromStorage(KEY_CURRENT_USER);
+    let currentFileName = getCurrentFileName();
+
+    // If not logged in, redirect to login page
+    if (currentUser.length == 0) {
+        if (!["signup.html", "login.html"].includes(currentFileName)) {
+
+            // window.location.href = "./login.html";
+
+            // Following code will be deleted later.
+            // Change to "false" to disable following code.
+            if (true) {
+
+                let exampleUser = new User().getUserBasedOnKey("email", "johndoe@email.com");
+
+                if (!exampleUser) {
+                    exampleUser = new User("John Doe", "johndoe07", "johndoe@email.com");
+                    exampleUser.setPassword("John07@doe");
+                    // Save created user to the storage
+                    exampleUser.saveNewUser();
+
+                    // Add the unique user ID of the new user to the taken_UIDs
+                    let userIDs = getFromStorage(KEY_TAKEN_UIDS);
+                    userIDs.push(exampleUser.user_id);
+                    saveToStorage(KEY_TAKEN_UIDS, userIDs);
+                }
+
+                saveToStorage(KEY_CURRENT_USER, [exampleUser]);
+                window.location.href = "./index.html";
+            }
+        }
+    } else {
+        // If logged in and still trying to access signup and login page
+        if (["signup.html", "login.html"].includes(currentFileName)) {
+            window.location.href = "./index.html";
+        }
+    }
+
+    /* ///////////////
+    LOGO
+    /////////////// */
+    let pictureLogoArray = this.querySelectorAll(".logo");
+
+    pictureLogoArray.forEach(logo => {
+        let img = this.createElement("img");
+        img.src = "./assets/logo/logo.svg";
+        switch (logo.getAttribute("data-size")) {
+            case SIZE_XS:
+                img.style.width = "3.2rem";
+                break;
+            case SIZE_S:
+                img.style.width = "4.8rem";
+                break;
+            default: case SIZE_M:
+                img.style.width = "6.4rem";
+                break;
+            case SIZE_L:
+                img.style.width = "8rem";
+
+                break;
+            case SIZE_XL:
+                img.style.width = "9.6rem";
+
+                break;
+        }
+        if (logo.getAttribute("data-name") == "true") {
+            let logoName = this.createElement("p");
+            logoName.innerHTML = `Habisphere`;
+            logo.appendChild(logoName)
+        }
+        logo.appendChild(img);
+    });
+
+
+    /* ///////////////
+    HANDLE INPUT EFFECTS
+    /////////////// */
+
+    let inputArray = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
+    let inputToggleArray = this.querySelectorAll("input[type=radio], input[type=checkbox]");
+
+    inputArray.forEach(input => {
         input.classList.add("text-input");
         input.classList.add(input.value ? "filled" : "unfilled");
 
@@ -347,7 +420,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 
-    allToggleInputs.forEach(input => {
+    inputToggleArray.forEach(input => {
         input.classList.add("toggle-input");
     });
+
+
 });
