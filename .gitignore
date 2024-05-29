@@ -16,6 +16,7 @@ lib/
 *.log
 *.sql
 *.sqlite
+get-code-context.sh
 
 # Prettier
 prettier.config.js
