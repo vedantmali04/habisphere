@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
             passwordVisibilityBtn.addEventListener("click", function (e) {
                 e.preventDefault();
                 input.type = input.type == "password" ? "text" : "password";
-                passwordVisibilityBtn.classList.toggle("show", input.type != "password");
+                passwordVisibilityBtn.classList.toggle("visible", input.type != "password");
             })
         }
     })
@@ -92,15 +92,50 @@ document.addEventListener("DOMContentLoaded", function () {
         input.classList.add("toggle-input");
     });
 
-    // POPULATE NAVIGATION DRAWER
+    /* ///////////////
+        NAVIGATION DRAWER
+    /////////////// */
+
 
     let navDrawerHolder = this.querySelector(".nav-drawer-holder");
     if (navDrawerHolder) {
         navDrawerHolder.innerHTML = compNavDrawer(CURRENT_USER);
+
+        // OPEN NAV button
+        let navOpenBtn = this.createElement("button");
+        navOpenBtn.classList.add("icon", "nav-open-btn");
+        navOpenBtn.innerHTML = `<i class="bi bi-list"></i>`;
+        navDrawerHolder.parentNode.append(navOpenBtn);
+
+        navOpenBtn = this.querySelector(".nav-open-btn");
+        navOpenBtn.addEventListener("click", function () {
+            navDrawerHolder.classList.add("visible");
+        })
+
+        // <button class="icon nav-close-btn"><i class="bi bi-arrow-left"></i></button>
+
+        // CLOSE NAV when clicked on SCRIM
+        navDrawerHolder.classList.add("visible")
+        navDrawerHolder.addEventListener("click", function (event) {
+            if (!event.target.closest(".nav-drawer")) {
+                navDrawerHolder.classList.remove("visible");
+            }
+        })
+
+        // CLOSE NAV when clicked on NAV-CLOSE-BTN
+        let navCloseBtn = this.querySelector(".nav-close-btn");
+        navCloseBtn.addEventListener("click", function () {
+            navDrawerHolder.classList.remove("visible");
+        })
     }
 
 
-    // ACTIONS ON LOG OUT BUTTON
+
+
+    /* ///////////////
+        LOGOUT BUTTON
+    /////////////// */
+
     let logoutBtnArr = this.querySelectorAll(".logout-btn")
     logoutBtnArr.forEach(btn => {
         btn.addEventListener("click", function (e) {

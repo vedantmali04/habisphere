@@ -22,7 +22,7 @@ export function compNavDrawer(user) {
     
         <!-- LOGO and Close Button -->
         <header class="nav-header">
-            <button class="icon" id="nav_close"><i class="bi bi-arrow-left"></i></button>
+            <button class="icon nav-close-btn"><i class="bi bi-arrow-left"></i></button>
         </header>
         <div class="divider"></div>
     
@@ -75,7 +75,7 @@ export function compNavDrawer(user) {
     
         <div class="divider"></div>
     
-        <menu id="menu_footer">
+        <menu class="nav-footer">
             <p class="fs-300">© Vedant Mali</p>
             <p class="fs-200">
                 <a href="#">About</a>

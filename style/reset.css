@@ -1,0 +1,245 @@
+/* /////////////////////////
+IMPORTS and SETUPS
+///////////////////////// */
+
+/* Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto:ital,wght@0,300;0,400;0,500;0,900;1,300;1,400;1,500;1,900&display=swap");
+
+/* Icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+:root {
+  /* Colors */
+  --clr-text-black: #000000;
+  --clr-text-grey: #111111;
+
+  --clr-bg-white: #f7f7f7;
+  --clr-bg-grey: #ebebeb;
+
+  --clr-primary-dark: #0b9b8a;
+  --clr-primary: #67ddab;
+  --clr-primary-light: #08dec5;
+  --clr-primary-hover: #08dec52e;
+  --clr-primary-focus: #08dec51f;
+
+  --clr-accent: #ddab67;
+  --clr-accent-hover: #ebcda4;
+  --clr-accent-light: #ebcea479;
+  --clr-accent-overlay: #ebcea458;
+
+  --gradient-main: linear-gradient(
+    4deg,
+    #0b9b8a 0%,
+    var(--clr-primary-light) 100%
+  );
+
+  --gradient-logo: linear-gradient(4deg, #ffc247 0%, #ff0066 100%);
+
+  /* Transparent Colors */
+  --clr-overlay: #13131466;
+  --clr-hover: #00000010;
+  --clr-divider: #13131450;
+  --clr-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+
+  /* Status Colors */
+  --clr-error: #c11300;
+  --clr-success: #00af1b;
+  --clr-tip: #018da5;
+
+  /* Animation Properties */
+  --animate-smoothness: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Font-Sizes */
+  --fs-100: 1rem;
+  --fs-200: 1.2rem;
+  --fs-300: 1.4rem;
+  --fs-400: 1.6rem;
+  --fs-500: 2rem;
+  --fs-600: 2.4rem;
+  --fs-700: 3.4rem;
+  --fs-800: 4.8rem;
+  --fs-900: 6rem;
+  --fs-1000: 9.6rem;
+
+  /* Font Families */
+  --ff-def: "Roboto", sans-serif;
+  --ff-head: "Abril Fatface", serif;
+}
+
+/* /////////////////////////
+CSS RESET
+///////////////////////// */
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1441px) {
+  html {
+    font-size: 75.2%;
+  }
+}
+
+@media (min-width: 2000px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+  transition: all 0.2s linear;
+}
+
+*::before,
+*::after {
+  font-family: "bootstrap-icons";
+}
+
+body {
+  font-family: var(--ff-def);
+  font-size: var(--fs-400);
+  color: var(--clr-text-black);
+  background-color: var(--clr-bg-white);
+  line-height: 1.5;
+  min-height: 100vh;
+  font-weight: 400;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  overscroll-behavior-x: none;
+}
+
+/* FOR DISABLED ANIMATION */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+  font-family: var(--ff-head);
+  color: var(--clr-text-grey);
+}
+
+.ff-head {
+  font-family: var(--ff-head);
+  font-size: var(--fs-900);
+}
+
+.ff-def {
+  font-family: var(--ff-def);
+}
+
+.fs-100,
+.overline {
+  font-size: var(--fs-100);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.fs-200 {
+  font-size: var(--fs-200);
+}
+
+.subtitle,
+.fs-300 {
+  font-size: var(--fs-300);
+}
+
+h6,
+.fs-400 {
+  font-size: var(--fs-400);
+  font-weight: 700;
+}
+
+h5,
+.fs-500 {
+  font-size: var(--fs-500);
+}
+
+h4,
+.fs-600 {
+  font-size: var(--fs-600);
+}
+
+h3,
+.fs-700 {
+  font-size: var(--fs-700);
+}
+
+.ff-head,
+.fs-900,
+.fs-800 {
+  font-weight: 300;
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+h2,
+.fs-800 {
+  font-size: var(--fs-800);
+}
+
+h1,
+.fs-900 {
+  font-size: var(--fs-900);
+}
+
+p {
+  line-height: 1.3;
+}
+
+form p {
+  max-width: 32rem;
+}
+
+code,
+pre,
+kbd,
+samp,
+var,
+blockquote,
+cite,
+abbr,
+.ff-mono {
+  font-family: var(--ff-mono);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+}
+
+a:not(button.text > a) {
+  color: var(--clr-primary-dark);
+}
+
+a:not(button.text > a):hover {
+  text-decoration: underline;
+}
