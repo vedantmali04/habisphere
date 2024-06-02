@@ -1,3 +1,11 @@
+import {
+    STORAGE_KEY,
+} from "./components/data.js";
+import { saveToStorage, getFromStorage } from "./components/utils.js";
+import { User } from "./components/utils.js";
+import { setInputMsg, removeInputMsg, validateInput, validateToggleInputs, setInputValue } from "./components/utils.js"; 
+
+
 // Input Tags
 let fullNameInput = document.getElementById("signup_fullname");
 let usernameInput = document.getElementById("signup_username");
@@ -12,8 +20,6 @@ let signupBtn = document.getElementById("signup_signup");
 
 // Steps Screens
 let form = document.getElementById("signup_form");
-let formStep1 = document.getElementById("form_step_1");
-let formStep2 = document.getElementById("form_step_2");
 
 // New User
 let newUser;
@@ -96,13 +102,13 @@ signupBtn.addEventListener("click", function (e) {
     newUser.saveNewUser();
 
     // Add the unique user ID of the new user to the taken_UIDs
-    let userIDs = getFromStorage(KEY_TAKEN_UIDS);
+    let userIDs = getFromStorage(STORAGE_KEY.taken_uids);
     userIDs.push(newUser.user_id);
-    saveToStorage(KEY_TAKEN_UIDS, userIDs);
+    saveToStorage(STORAGE_KEY.taken_uids, userIDs);
 
     // Disable the signup button and navigate to the dashboard
     signupBtn.disabled = true;
-    saveToStorage(KEY_CURRENT_USER, [newUser]);
+    saveToStorage(STORAGE_KEY.current_user, [newUser]);
     window.location.href = "./index.html";
 
 });

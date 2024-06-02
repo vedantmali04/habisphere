@@ -1,12 +1,16 @@
+import {
+    STORAGE_KEY,
+} from "./components/data.js";
+import { saveToStorage, getFromStorage } from "./components/utils.js";
+import { User } from "./components/utils.js";
+import { setInputMsg, removeInputMsg, validateInput, validateToggleInputs, setInputValue } from "./components/utils.js";
+
 // Input Tags
 let idInput = document.getElementById("login_id");
 let passwordInput = document.getElementById("login_password");
 
 // Buttons
 let loginBtn = document.getElementById("login_login");
-
-// Steps Screens
-let form = document.getElementById("login_form");
 
 // Login Button Press
 loginBtn.addEventListener("click", function (e) {
@@ -33,7 +37,7 @@ loginBtn.addEventListener("click", function (e) {
     let userByUsername = new User().getUserBasedOnKey("username", idInput.value);
 
     // Set a default currentUser
-    currentUser = null;
+    let currentUser = null;
 
     // If user found by Email, and the password matched
     if (userByEmail && userByEmail.password == passwordInput.value) {
@@ -52,7 +56,7 @@ loginBtn.addEventListener("click", function (e) {
     // Disable the login button and navigate to the dashboard, if current user exist
     if (currentUser != null) {
         loginBtn.disabled = true;
-        saveToStorage(KEY_CURRENT_USER, [currentUser]);
+        saveToStorage(STORAGE_KEY.current_user, [currentUser]);
         window.location.href = "./index.html";
     }
 

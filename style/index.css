@@ -23,9 +23,9 @@ IMPORTS and SETUPS
   --clr-primary-focus: #08dec51f;
 
   --clr-accent: #ddab67;
-  --clr-accent-light: #ebcda4;
+  --clr-accent-hover: #ebcda4;
+  --clr-accent-light: #ebcea479;
   --clr-accent-overlay: #ebcea458;
-  --clr-accent-hover: #ebcea479;
 
   --gradient-main: linear-gradient(
     4deg,
@@ -422,7 +422,6 @@ button.icon:hover {
 }
 
 button.icon:active {
-  color: var(--clr-primary);
   scale: 0.9;
 }
 
@@ -530,19 +529,19 @@ fieldset:has(.trail) .text-input {
   padding-right: 4.8rem;
 }
 
-fieldset .show-pass-btn .bi {
+fieldset .password-visibility-btn .bi {
   position: absolute;
   top: 50%;
   left: 50%;
   translate: -50% -50%;
 }
 
-fieldset .show-pass-btn .bi-eye-slash,
-fieldset .show-pass-btn.show .bi-eye {
+fieldset .password-visibility-btn .bi-eye-slash,
+fieldset .password-visibility-btn.show .bi-eye {
   opacity: 0;
 }
-fieldset .show-pass-btn .bi-eye,
-fieldset .show-pass-btn.show .bi-eye-slash {
+fieldset .password-visibility-btn .bi-eye,
+fieldset .password-visibility-btn.show .bi-eye-slash {
   opacity: 1;
 }
 
@@ -716,32 +715,45 @@ NAVIGATION DRAWER
   background-color: var(--clr-overlay);
 }
 
+.nav-header #nav_close,
+.menu-item .settings-btn {
+  margin-left: auto;
+}
+
 .nav-drawer {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   min-width: 22rem;
   max-width: 28rem;
   background-color: var(--clr-bg-white);
   padding: 0.4rem;
+  padding-right: 1.6rem;
 }
 
 .menu-holder {
   overflow-y: auto;
-  height: calc(100vh - 15rem);
+  height: calc(100vh - 15.4rem);
 }
 
-.nav-header {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.8rem;
+.menu-holder::-webkit-scrollbar {
+  display: block;
+  width: 0.4rem;
+  background-color: var(--clr-accent-overlay);
+}
+
+.menu-holder::-webkit-scrollbar-thumb {
+  background: var(--clr-accent-light);
+  border-radius: 50rem;
+}
+
+.menu-holder::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-accent-hover);
 }
 
 .nav-drawer menu {
   padding: 0.4rem;
-  margin: 1.6rem 0;
+  margin: 0.8rem 0;
 }
 
 .nav-drawer .menu-item {
@@ -753,19 +765,29 @@ NAVIGATION DRAWER
   color: var(--clr-text-black);
   font-weight: 400;
   width: 100%;
+  overflow: hidden;
+  text-wrap: nowrap;
 }
 
 .nav-drawer menu#menu_user_info .menu-item {
   padding: 0.4rem !important;
+  gap: 0.4rem !important;
+}
+
+.nav-drawer menu .info-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-drawer menu .info-column > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 14rem;
 }
 
 .nav-drawer .avatar-column {
   min-width: 5rem;
   width: 5rem;
-}
-
-.nav-drawer .info-column {
-  width: 100%;
 }
 
 .nav-drawer .name {
@@ -778,7 +800,7 @@ NAVIGATION DRAWER
 
 .menu-item:hover .settings-btn {
   rotate: 90deg;
-  background-color: var(--clr-accent-overlay);
+  margin-left: auto;
 }
 
 .menu-item:hover {
