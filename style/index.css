@@ -215,7 +215,7 @@ NAVIGATION DRAWER
 }
 
 .menu-item .icon.filled,
-.menu-item.active .icon:not(.filled) {
+.menu-item.active .icon:not(.filled, .settings-btn) {
   visibility: hidden;
   display: none;
 }
