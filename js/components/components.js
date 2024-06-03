@@ -16,6 +16,7 @@ const USER = getFromStorage(STORAGE_KEY.current_user);
 /////////////// */
 
 export function compNavDrawer(user) {
+    let currentFile = getCurrentFileName();
     return `
     <!-- NAVIGATION DRAWER STARTS -->
     <nav class="nav-drawer">
@@ -31,7 +32,7 @@ export function compNavDrawer(user) {
     
             <!-- User Avatar, Name, Email and Settings link -->
             <menu id="menu_user_info">
-                <a class="menu-item" href="./settings.html">
+                <a class="menu-item ${currentFile == "edit-profile.html" ? "active" : ""}" href="./edit-profile.html">
                     <picture class="avatar avatar-column"><img src="./assets/avatars/${user.avatar}" alt="${user.full_name}">
                     </picture>
                     <span class="info-column">
@@ -44,27 +45,27 @@ export function compNavDrawer(user) {
     
             <!-- Pages Menu -->
             <menu id="menu_pages">
-                <a class="menu-item active" href="#">
+                <a class="menu-item ${currentFile == "index.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-grid-1x2"></i></span>
                     <span class="icon filled"><i class="bi bi-grid-1x2-fill"></i></span> Habits
                 </a>
-                <a class="menu-item" href="#">
+                <a class="menu-item ${currentFile == "to-do.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-check-square"></i></span>
                     <span class="icon filled"><i class="bi bi-check-square-fill"></i></span> To-do
                 </a>
-                <a class="menu-item" href="#">
+                <a class="menu-item ${currentFile == "notebook.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-sticky"></i></span>
                     <span class="icon filled"><i class="bi bi-sticky-fill"></i></span> Notebook
                 </a>
-                <a class="menu-item" href="#">
+                <a class="menu-item ${currentFile == "statistics.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-bar-chart-line"></i></span>
                     <span class="icon filled"><i class="bi bi-bar-chart-line-fill"></i></span> Statistics
                 </a>
-                <a class="menu-item" href="#">
+                <a class="menu-item ${currentFile == "journal.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-journal-bookmark"></i></span>
                     <span class="icon filled"><i class="bi bi-journal-bookmark-fill"></i></span> Journal
                 </a>
-                <a class="menu-item" href="#">
+                <a class="menu-item ${currentFile == "challeges.html" ? "active" : ""}" href="#">
                     <span class="icon"><i class="bi bi-flag"></i></span>
                     <span class="icon filled"><i class="bi bi-flag-fill"></i></span> Challenges
                 </a>

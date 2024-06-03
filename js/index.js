@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // <button class="icon nav-close-btn"><i class="bi bi-arrow-left"></i></button>
 
         // CLOSE NAV when clicked on SCRIM
-        navDrawerHolder.classList.add("visible")
+        // navDrawerHolder.classList.add("visible")
         navDrawerHolder.addEventListener("click", function (event) {
             if (!event.target.closest(".nav-drawer")) {
                 navDrawerHolder.classList.remove("visible");

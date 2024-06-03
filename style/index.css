@@ -71,9 +71,8 @@ NAVIGATION DRAWER
   height: 3.6rem;
   aspect-ratio: unset !important;
   padding-left: 1.2rem !important;
-  background: var(--clr-accent);
+  background: var(--clr-primary-dark);
   color: var(--clr-bg-white);
-  /* border: 1px solid var(--clr-accent); */
   border-left: none;
   border-radius: 0 !important;
   border-top-right-radius: 1.2rem !important;
@@ -82,10 +81,6 @@ NAVIGATION DRAWER
 
 .nav-open-btn i {
   font-size: var(--fs-600) !important;
-}
-
-.nav-open-btn:hover i {
-  scale: 1.1;
 }
 
 .nav-open-btn:active {
@@ -108,7 +103,7 @@ NAVIGATION DRAWER
   opacity: 1;
   visibility: visible;
   left: 0;
-  transition: .5s ease-out;
+  transition: 0.5s ease-out;
 }
 
 /* Navigation Drawer */
@@ -260,6 +255,86 @@ NAVIGATION DRAWER
 
 /* NAV On Bigger Screens */
 @media (min-width: 1024px) {
+  .nav-open-btn {
+    padding-left: 0.3rem !important;
+    left: 1.5rem;
+    border-radius: 1.2rem !important;
+  }
+
+  .nav-open-btn:active {
+    left: 1.2rem;
+  }
+
+  .nav-drawer-holder.visible ~ .nav-open-btn {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .nav-drawer-holder,
+  .nav-drawer-holder.visible,
+  .nav-drawer,
+  .nav-drawer-holder.visible .nav-drawer {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    height: 100vh;
+    background-color: var(--clr-bg-white);
+  }
+
+  .nav-drawer-holder {
+    border-right: 1px solid var(--clr-divider);
+  }
+
+  .nav-drawer-holder,
+  .nav-drawer {
+    width: 6.4rem;
+  }
+
+  .nav-drawer {
+    padding-left: 0.6rem;
+    padding-right: 0.4rem !important;
+  }
+
+  .nav-drawer-holder.visible,
+  .nav-drawer-holder.visible .nav-drawer {
+    width: 28rem;
+  }
+
+  .nav-drawer-holder.visible .nav-drawer {
+    padding-left: 0.4rem;
+  }
+
+  .nav-drawer-holder:not(.visible) .menu-item {
+    width: 4.2rem;
+    padding-left: 1.4rem !important;
+  }
+
+  .nav-drawer-holder:not(.visible) #menu_user_info .menu-item {
+    width: 5rem;
+    height: 5rem;
+    padding: 0 !important;
+    margin-left: -0.3rem;
+  }
+
+  .nav-drawer-holder:not(.visible) .logout-btn.menu-item {
+    margin-left: 0.5rem;
+    padding-left: 1.2rem !important;
+  }
+
+  .nav-drawer-holder:not(.visible) .nav-footer,
+  .nav-drawer-holder:not(.visible) .divider {
+    width: 5.4rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  .nav-drawer-holder:not(.visible) .nav-footer .fs-300 {
+    display: none;
+  }
+
+  .menu-holder {
+    height: calc(100vh - 17.6rem);
+  }
 }
 
 /* /////////////////////////
