@@ -171,6 +171,19 @@ export class User extends Settings {
         })
         return foundUser;
     }
+
+    // Find and update user with current user
+    updateUser(updatedCurrentUser) {
+        let userArray = getFromStorage(STORAGE_KEY.users);
+        userArray.forEach((user, i) => {
+            if (user.user_id == updatedCurrentUser.user_id) {
+                userArray[i] = updatedCurrentUser;
+            }
+        })
+        saveToStorage(STORAGE_KEY.users, userArray);
+        saveToStorage(STORAGE_KEY.current_user, [updatedCurrentUser]);
+        return getFromStorage(STORAGE_KEY.current_user)[0];
+    }
 }
 
 /* ///////////////

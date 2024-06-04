@@ -32,11 +32,13 @@
 
         <!-- EDIT PROFILE SECTION STARTS -->
         <section class="edit-profile-sec">
+
             <!-- EDIT AVATAR SECTION STARTS -->
             <section class="edit-avatar-sec">
                 <!-- Current Avatar  -->
                 <picture class="avatar center">
-                    <button class="ghost edit-avatar-btn mobile-only"><i class="bi bi-person-gear"></i> Change Avatar</button>
+                    <button class="ghost edit-avatar-btn mobile-only"><i class="bi bi-person-gear"></i> Change
+                        Avatar</button>
                 </picture>
 
                 <!-- Choose Avatar Section  -->
@@ -45,11 +47,12 @@
                     <form class="avatar-radios-box">
                         <fieldset>
                             <label>
-                                Choose Avatar
-                                <button class="text keep-avatar-btn mobile-only" style="margin-left: auto;"><i class="bi bi-x"></i> Close</button>
+                                <h2 class="fs-500">Choose Avatar</h2>
+                                <button type="button" class="text close-avatar-choice-btn mobile-only"
+                                    style="margin-left: auto;"><i class="bi bi-x"></i> Close</button>
                             </label>
                             <div class="check-radio-box">
-                                
+                                <!-- To be populated  -->
                             </div>
                         </fieldset>
                     </form>
@@ -57,6 +60,57 @@
                 </section>
             </section>
             <!-- EDIT AVATAR SECTION ENDS -->
+
+
+            <!-- EDIT INFO SECTION STARTS -->
+            <form class="edit-info-sec">
+                <h2 class="fs-500">Account Info</h2>
+
+                <p class="subtitle">Update your account information</p>
+
+                <!-- Full Name -->
+                <fieldset>
+                    <label for="settings_fullname">Full Name</label>
+                    <input type="text" id="settings_fullname" name="settings_fullname" autocomplete="name" autofocus
+                        required pattern="([A-Za-z]+){2,}\s+([A-Za-z]+)(?:\s+([A-Za-z]+){2,})?$"
+                        style="text-transform: capitalize;">
+                </fieldset>
+
+                <!-- Username -->
+                <fieldset>
+                    <label for="settings_username">Username</label>
+                    <input type="text" id="settings_username" name="settings_username" autocomplete="username" required
+                        pattern="^(?=.*\d)[a-zA-Z][a-zA-Z0-9_]{6,19}$" style="text-transform: lowercase;">
+                </fieldset>
+
+                <!-- Bio -->
+                <fieldset>
+                    <label for="settings_bio">About You</label>
+                    <textarea class="text-input" type="text" id="settings_bio" name="settings_bio"
+                        pattern="^(?=.*\d)[a-zA-Z][a-zA-Z0-9_]{6,19}$"></textarea>
+                </fieldset>
+
+                <!-- Email -->
+                <fieldset>
+                    <label for="settings_email">Email</label>
+                    <input type="email" id="settings_email" name="settings_email" autocomplete="email" required
+                        pattern="^([a-zA-Z0-9._%\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})$">
+                </fieldset>
+
+                <!-- Save Changes Button -->
+                <fieldset>
+                    <button class="primary" type="button" id="settings_save_changes" name="settings_save_changes">
+                        <i class="bi bi-person-check"></i>Save Changes</button>
+                </fieldset>
+
+                <!-- Change Password button -->
+                <button class="text" type="button" id="change_password_btn" style="margin-top: 2.4rem;">Change Password</button>
+
+
+            </form>
+            <!-- EDIT INFO SECTION ENDS -->
+
+
         </section>
         <!-- EDIT PROFILE SECTION ENDS -->
 

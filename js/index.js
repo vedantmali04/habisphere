@@ -8,7 +8,7 @@ import {
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
 
-const CURRENT_USER = getFromStorage(STORAGE_KEY.current_user)[0];
+let CURRENT_USER = getFromStorage(STORAGE_KEY.current_user)[0];
 const CURRENT_FILE_NAME = getCurrentFileName();
 
 /* ///////////////

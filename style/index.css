@@ -378,6 +378,7 @@ NAVIGATION DRAWER
     overflow: hidden;
     height: 100vh;
     background-color: var(--clr-bg-white);
+    transition: all 0s;
   }
 
   .nav-drawer-holder {

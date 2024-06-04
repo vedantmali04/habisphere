@@ -16,7 +16,7 @@ button a {
 button {
   font-family: var(--ff-def);
   text-transform: capitalize;
-  letter-spacing: 1.25px;
+  letter-spacing: 1.1px;
   color: var(--clr-text-grey);
   background-color: transparent;
   width: calc(100% - 0.8rem);
@@ -76,7 +76,7 @@ fieldset .check-radio-box:has(input:disabled) *,
 button.primary {
   font-weight: 500;
   background: var(--gradient-main);
-  color: var(--clr-text-grey);
+  color: var(--clr-bg-white);
 }
 
 button.primary::before {
@@ -120,6 +120,7 @@ button.text {
   width: fit-content;
   border-radius: 0;
   border-bottom: 1px solid transparent;
+  color: var(--clr-accent);
 }
 
 button.text:hover,
@@ -129,6 +130,10 @@ button.text:hover a {
 
 button:hover > i {
   color: initial !important;
+}
+
+button.primary:hover > i {
+  color: var(--clr-bg-white) !important;
 }
 
 button.text:active {
@@ -176,6 +181,7 @@ fieldset label {
 }
 
 fieldset:has(.text-input) label {
+  border-radius: 0.8rem 0.8rem 0 0;
   position: absolute;
   z-index: 11;
   padding: 0.8rem 1.6rem;
@@ -188,6 +194,14 @@ fieldset:has(.text-input) label {
 
 fieldset:has(.text-input:hover, .text-input:focus) label {
   color: var(--clr-accent);
+}
+
+fieldset:has(.text-input:hover) label {
+  background-color: var(--clr-primary-hover);
+}
+
+fieldset:has(.text-input:focus) label {
+  background-color: var(--clr-primary-focus);
 }
 
 fieldset:has(:is(.text-input:focus, .text-input.filled)) label {

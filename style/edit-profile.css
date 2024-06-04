@@ -1,16 +1,36 @@
+/* /////////////////////////
+EDIT PROFILE SECTION
+///////////////////////// */
+
 .edit-profile-sec {
-  padding: 0.4rem;
+  /* padding: 0.4rem; */
   background-color: var(--clr-bg-grey);
   min-height: 100vh;
 }
 
+@media (min-width: 769px) {
+  .edit-profile-sec {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: stretch;
+    align-items: stretch;
+  }
+
+  .edit-profile-sec > * {
+    width: 100%;
+  }
+}
+
+/* EDIT AVATAR SECTION */
 .edit-avatar-sec {
   background-color: var(--clr-bg-white);
   padding: 0.4rem;
+  margin: 0.4rem;
   padding-bottom: 3.2rem;
   border-radius: 1.6rem;
 }
 
+/* CURRENT AVATAR */
 .edit-avatar-sec .avatar {
   width: 17rem;
 }
@@ -33,14 +53,33 @@ button.edit-avatar-btn:hover {
   filter: grayscale(100);
 }
 
+/* CHOOSE AVATAR AND RADIOS */
 .choose-avatar-sec {
-  margin-top: 2.4rem;
   border-radius: 5rem;
+  overflow: hidden;
+  transition: all 1s ease-in-out;
 }
 
-.avatar-radios-box fieldset {
+.choose-avatar-sec.visible {
+  max-height: 100rem;
+}
+
+@media (max-width: 768px) {
+  .edit-avatar-sec:has(.choose-avatar-sec.visible) .edit-avatar-btn {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .choose-avatar-sec {
+    max-height: 0px;
+  }
+}
+.avatar-radios-box fieldset label {
+  padding-left: 1.6rem;
+}
+
+fieldset {
   max-width: 100%;
-  padding: 0.4rem;
 }
 
 .avatar-radios-box .check-radio-box {
@@ -66,10 +105,16 @@ button.edit-avatar-btn:hover {
   z-index: 11;
   bottom: 8%;
   right: 8%;
-  box-shadow: inset 0 0 0 2px var(--clr-accent),
-     0 0 0 4px var(--clr-bg-white);
+  box-shadow: inset 0 0 0 2px var(--clr-accent), 0 0 0 4px var(--clr-bg-white);
 }
 
 .avatar-radios-box label:has(input:checked) {
   border-color: var(--clr-primary);
+}
+
+/* EDIT INFORMATION SECTION */
+.edit-info-sec {
+  min-height: 100%;
+  background-color: var(--clr-bg-white);
+  padding: 1.6rem;
 }

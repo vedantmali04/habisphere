@@ -17,15 +17,15 @@ IMPORTS and SETUPS
   --clr-bg-grey: #ebebeb;
 
   --clr-primary-dark: #0b9b8a;
-  --clr-primary: #67ddab;
+  --clr-primary: #00c5a1;
   --clr-primary-light: #08dec5;
-  --clr-primary-hover: #08dec52e;
-  --clr-primary-focus: #08dec51f;
+  --clr-primary-hover: #CBF2EE;
+  --clr-primary-focus: #DAF4F1;
 
   --clr-accent: #ddab67;
   --clr-accent-hover: #ebcda4;
-  --clr-accent-light: #ebcea479;
-  --clr-accent-overlay: #ebcea458;
+  --clr-accent-light: #F6E8D4;
+  --clr-accent-overlay: #F8EEE0;
 
   --gradient-main: linear-gradient(
     4deg,
