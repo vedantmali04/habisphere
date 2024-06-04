@@ -1,6 +1,6 @@
 import {
     STORAGE_KEY,
-    STATUS_UI_FEEDBACK,
+    UI_STATUS_FEEDBACK,
     UI_CLASSES,
     UI_THEME
 } from "./data.js";
@@ -191,7 +191,7 @@ export class User extends Settings {
 /////////////// */
 
 // FUNCTION to SET specified INPUT MESSAGE
-export function setInputMsg(inputTag, msg, status = STATUS_UI_FEEDBACK.error) {
+export function setInputMsg(inputTag, msg, status = UI_STATUS_FEEDBACK.error) {
     removeInputMsg(inputTag, status);
 
     // Create message div
@@ -199,11 +199,11 @@ export function setInputMsg(inputTag, msg, status = STATUS_UI_FEEDBACK.error) {
     // Set class, by default, it's "error"
     let className = UI_CLASSES.error;
     switch (status) {
-        case STATUS_UI_FEEDBACK.tip:
+        case UI_STATUS_FEEDBACK.tip:
             className = UI_CLASSES.tip;
             break;
 
-        case STATUS_UI_FEEDBACK.success:
+        case UI_STATUS_FEEDBACK.success:
             className = UI_CLASSES.success;
             break;
 
@@ -219,16 +219,16 @@ export function setInputMsg(inputTag, msg, status = STATUS_UI_FEEDBACK.error) {
 }
 
 // FUNCTION to REMOVE specified INPUT MESSAGE
-export function removeInputMsg(inputTag, status = STATUS_UI_FEEDBACK.error) {
+export function removeInputMsg(inputTag, status = UI_STATUS_FEEDBACK.error) {
     const fieldset = getParentElement(inputTag, UI_CLASSES.fieldset);
     // Get type of msg to be deleted, by default, "error"
     let className = UI_CLASSES.error;
     switch (status) {
-        case STATUS_UI_FEEDBACK.tip:
+        case UI_STATUS_FEEDBACK.tip:
             className = UI_CLASSES.tip;
             break;
 
-        case STATUS_UI_FEEDBACK.success:
+        case UI_STATUS_FEEDBACK.success:
             className = UI_CLASSES.success;
             break;
 

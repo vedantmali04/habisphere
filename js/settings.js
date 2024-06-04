@@ -6,9 +6,10 @@
 import {
     STORAGE_KEY,
     UI_CLASSES,
-    UI_SIZE
+    UI_SIZE,
+    UI_STATUS_FEEDBACK
 } from "./components/data.js";
-import { User } from "./components/utils.js";
+import { User, removeInputMsg, setInputMsg, validateInput } from "./components/utils.js";
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
 
@@ -91,22 +92,85 @@ document.addEventListener("DOMContentLoaded", function () {
         UPDATE ACCOUNT INFORMATION - EDIT INFO SEC
     /////////////// */
 
-    let updateInfoFullNameInput = this.querySelector("#settings_fullname");
-    let updateInfoUsernameInput = this.querySelector("#settings_username");
-    let updateInfoBioInput = this.querySelector("#settings_bio");
-    let updateInfoEmailInput = this.querySelector("#settings_email");
-    let updateInfoSaveChangesBtn = this.querySelector("#settings_save_changes");
-    
+    let fullnameInput = this.querySelector("#settings_fullname");
+    let usernameInput = this.querySelector("#settings_username");
+    let bioInput = this.querySelector("#settings_bio");
+    let emailInput = this.querySelector("#settings_email");
+    let saveChangesBtn = this.querySelector("#settings_save_changes");
+
+
     // Change LABEL class to filled, if the value exists
-    updateInfoFullNameInput.classList.toggle("filled", CURRENT_USER.full_name);
-    updateInfoUsernameInput.classList.toggle("filled", CURRENT_USER.username);
-    updateInfoBioInput.classList.toggle("filled", CURRENT_USER.bio);
-    updateInfoEmailInput.classList.toggle("filled", CURRENT_USER.email);
+    fullnameInput.classList.toggle("filled", CURRENT_USER.full_name);
+    usernameInput.classList.toggle("filled", CURRENT_USER.username);
+    bioInput.classList.toggle("filled", CURRENT_USER.bio);
+    emailInput.classList.toggle("filled", CURRENT_USER.email);
+
+    // STORING VALUES TEMPORARILY
+    let fullname = CURRENT_USER.full_name;
+    let username = CURRENT_USER.username;
+    let bio = CURRENT_USER.bio;
+    let email = CURRENT_USER.email;
 
     // Fill value from DATABASE to INPUTs
-    updateInfoFullNameInput.value = CURRENT_USER.full_name;
-    updateInfoUsernameInput.value = CURRENT_USER.username;
-    updateInfoBioInput.value = CURRENT_USER.bio;
-    updateInfoEmailInput.value = CURRENT_USER.email;
-    
+    fullnameInput.value = fullname;
+    usernameInput.value = username;
+    bioInput.value = bio;
+    emailInput.value = email;
+
+    saveChangesBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        removeInputMsg(this, UI_STATUS_FEEDBACK.tip)
+
+        let inputFullname = fullnameInput.value;
+        let inputUsername = usernameInput.value;
+        let inputBio = bioInput.value;
+        let inputEmail = emailInput.value;
+
+        if (
+            inputFullname == fullname &&
+            inputUsername == username &&
+            inputBio == bio &&
+            inputEmail == email
+        ) {
+            setInputMsg(this, "You haven't made any changes.", UI_STATUS_FEEDBACK.tip);
+            setTimeout(() => {
+                removeInputMsg(this, UI_STATUS_FEEDBACK.tip);
+            }, 7000);
+            return;
+        }
+
+        let validationArray = [];
+
+        validationArray.push(validateInput(fullnameInput, "Must be first, middle (optional) and last name."));
+        validationArray.push(validateInput(usernameInput, "Must be at least 6 characters and must contain a number"));
+        validationArray.push(validateInput(emailInput, "Enter a valid email address."));
+
+
+        if (!validationArray.includes(false)) {
+            validationArray = [];
+
+            // If username is already taken
+            if (new User().getUserBasedOnKey("username", inputUsername) && inputUsername != username) {
+                setInputMsg(usernameInput, "This username is already taken");
+                validationArray.push(false);
+            }
+
+            // If email is already exists
+            if (new User().getUserBasedOnKey("email", inputEmail) && inputEmail != email) {
+                setInputMsg(emailInput, `This  email is already taken`);
+                validationArray.push(false);
+            }
+
+            if (!validationArray.includes(false)) {
+                CURRENT_USER.full_name = fullnameInput.value;
+                CURRENT_USER.username = usernameInput.value;
+                CURRENT_USER.bio = bioInput.value;
+                CURRENT_USER.email = emailInput.value;
+                CURRENT_USER = new User().updateUser(CURRENT_USER);
+            }
+
+        }
+    })
+
 })

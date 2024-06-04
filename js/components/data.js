@@ -54,7 +54,7 @@ export const STATUS_HTTP_RESPONSE = {
 }
 
 // Input Status
-export const STATUS_UI_FEEDBACK = {
+export const UI_STATUS_FEEDBACK = {
     error: -1,
     tip: 0,
     success: 1

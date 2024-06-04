@@ -46,6 +46,9 @@ IMPORTS and SETUPS
   --clr-error: #c11300;
   --clr-success: #00af1b;
   --clr-tip: #018da5;
+  --clr-error-light: #ff3c00;
+  --clr-success-light: #00e068;
+  --clr-tip-light: #00c7ea;
 
   /* Animation Properties */
   --animate-smoothness: cubic-bezier(0.2, 0, 0, 1);

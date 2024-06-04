@@ -352,8 +352,9 @@ fieldset .check-radio-box input[type="checkbox"] {
 
 /* INPUT TAG FEEDBACKS and Certain Notes on the page */
 
-fieldset .msg,
-.note {
+:is(fieldset, .snackbar) .msg,
+.note,
+.snackbar .msg {
   gap: 0.8rem;
   justify-content: start;
   text-align: start !important;
@@ -382,22 +383,25 @@ fieldset .msg.tip,
   color: var(--clr-primary-light);
 }
 
-fieldset .msg::before,
+:is(fieldset, .snackbar) .msg::before,
 .note::before {
   align-self: start;
 }
 
 fieldset .msg.error::before,
+.snackbar.error .msg::before,
 .note.danger::before {
   content: "\F332";
 }
 
 fieldset .msg.success::before,
+.snackbar.success .msg::before,
 .note.success::before {
   content: "\F26A";
 }
 
 fieldset .msg.tip::before,
+.snackbar.tip .msg::before,
 .note.tip::before {
   content: "\F468";
 }
@@ -436,8 +440,12 @@ fieldset .msg.tip {
   order: 6;
 }
 
-fieldset .msg {
+fieldset button {
   order: 7;
+}
+
+fieldset .msg {
+  order: 8;
 }
 
 fieldset .check-radio-box label input {

@@ -3,7 +3,8 @@
 import {
     STORAGE_KEY,
     UI_CLASSES,
-    UI_SIZE
+    UI_SIZE,
+    UI_STATUS_FEEDBACK
 } from "./components/data.js";
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
@@ -94,6 +95,23 @@ if (CURRENT_USER) {
                 `;
 }
 
+/* ///////////////
+    SNACKBAR GENERATION FUNCTION
+/////////////// */
+
+function snackbarGenerate(msg, status = UI_STATUS_FEEDBACK.tip, undoBtn = false) {
+    let snackbarSec = document.querySelector(".snackbar-sec");
+
+    let snackbar = document.createElement("div");
+    snackbar.classList.add("snackbar", status)
+    snackbar.innerHTML = `
+        <p class="fs-400 msg">This is a message</p>
+        <button class="icon"><i class="bi bi-x-lg"></i></button>
+    `;
+
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ///////////////
@@ -109,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let navOpenBtn = this.createElement("button");
         navOpenBtn.classList.add("icon", "nav-open-btn");
         navOpenBtn.innerHTML = `<i class="bi bi-list"></i>`;
-        navDrawerHolder.parentNode.append(navOpenBtn);
+        navDrawerHolder.parentNode.prepend(navOpenBtn);
 
         navOpenBtn = this.querySelector(".nav-open-btn");
         navOpenBtn.addEventListener("click", function () {
@@ -132,6 +150,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 
+    /* ///////////////
+        SNACKBAR
+    /////////////// */
+
+    let snackbarSec = this.createElement("section");
+    snackbarSec.classList.add("snackbar-sec");
+    this.body.prepend(snackbarSec);
 
 
     /* ///////////////
@@ -188,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /////////////// */
 
     // FILLABLE INPUTS (all inputs except Radios and Checkboxes)
-    let inputArray = this.querySelectorAll("input:not([type=radio]):not([type=checkbox])");
+    let inputArray = this.querySelectorAll("input:not([type=radio]):not([type=checkbox]), .text-input");
 
     inputArray.forEach(input => {
         input.classList.add("text-input");

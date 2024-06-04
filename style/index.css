@@ -133,7 +133,9 @@ fieldset .msg,
 .note,
 button,
 .logo,
-.nav-drawer .menu-item {
+.nav-drawer .menu-item,
+.snackbar,
+.snackbar .msg {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -441,5 +443,103 @@ NAVIGATION DRAWER
 
   .menu-holder {
     height: calc(100vh - 17.6rem);
+  }
+}
+
+/* /////////////////////////
+SNACKBAR
+///////////////////////// */
+
+.snackbar-sec {
+  position: fixed;
+  bottom: 1.6rem;
+  right: 1.6rem;
+  width: 100%;
+  max-width: 43.2rem;
+  z-index: 20;
+  border: 1px solid red;
+  overflow: hidden;
+}
+
+.snackbar {
+  --clr-snackbar-theme: var(--clr-tip-light);
+  border: 2px solid var(--clr-snackbar-theme);
+  background-color: var(--clr-text-grey);
+  min-height: 6.4rem;
+  border-radius: 0.8rem;
+  gap: 0.8rem;
+  margin: 0.4rem 0;
+  justify-content: space-between;
+  padding: 0.4rem 1.2rem;
+  animation: snackbarEntry 0.5s linear;
+  overflow: hidden;
+}
+
+.snackbar.exit {
+  animation: snackbarExit 0.5s linear;
+}
+
+.snackbar.error {
+  --clr-snackbar-theme: var(--clr-error-light);
+}
+
+.snackbar.success {
+  --clr-snackbar-theme: var(--clr-success-light);
+}
+
+.snackbar.tip {
+  --clr-snackbar-theme: var(--clr-tip-light);
+}
+
+.snackbar button {
+  color: var(--clr-bg-white) !important;
+}
+
+.snackbar button:hover,
+.snackbar button:hover i {
+  background-color: var(--clr-text-grey);
+  color: var(--clr-primary) !important;
+}
+
+.snackbar .msg {
+  font-weight: 400;
+  color: var(--clr-snackbar-theme);
+  display: flex;
+  gap: 0.8rem;
+}
+
+@keyframes snackbarEntry {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+    translate: 0 50%;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0%;
+  }
+}
+
+@keyframes snackbarExit {
+  0% {
+    opacity: 1;
+    scale: 1;
+    max-height: 100rem;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    scale: 0.9;
+    max-height: 0rem;
   }
 }
