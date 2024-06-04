@@ -1,0 +1,75 @@
+.edit-profile-sec {
+  padding: 0.4rem;
+  background-color: var(--clr-bg-grey);
+  min-height: 100vh;
+}
+
+.edit-avatar-sec {
+  background-color: var(--clr-bg-white);
+  padding: 0.4rem;
+  padding-bottom: 3.2rem;
+  border-radius: 1.6rem;
+}
+
+.edit-avatar-sec .avatar {
+  width: 17rem;
+}
+
+.avatar .edit-avatar-btn {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50% -75%;
+  z-index: 11;
+  background-color: var(--clr-bg-white);
+  border-radius: 10rem;
+}
+
+button.edit-avatar-btn:hover {
+  background-color: var(--clr-bg-white);
+}
+
+.avatar:has(.edit-avatar-btn:hover) img {
+  filter: grayscale(100);
+}
+
+.choose-avatar-sec {
+  margin-top: 2.4rem;
+  border-radius: 5rem;
+}
+
+.avatar-radios-box fieldset {
+  max-width: 100%;
+  padding: 0.4rem;
+}
+
+.avatar-radios-box .check-radio-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.avatar-radios-box .check-radio-box label {
+  position: relative;
+  width: 10.4rem;
+  aspect-ratio: 1;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px dashed transparent;
+  stroke-dashoffset: 10;
+}
+
+.avatar-radios-box .check-radio-box label input {
+  position: absolute;
+  z-index: 11;
+  bottom: 8%;
+  right: 8%;
+  box-shadow: inset 0 0 0 2px var(--clr-accent),
+     0 0 0 4px var(--clr-bg-white);
+}
+
+.avatar-radios-box label:has(input:checked) {
+  border-color: var(--clr-primary);
+}

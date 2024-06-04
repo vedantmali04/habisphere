@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <link rel="shortcut icon" href="./assets/logo/logo.svg" type="image/x-icon">
+
+    <!-- Styelsheet -->
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/edit-profile.css">
+
+</head>
+
+<body>
+    <!-- NAVIGATION DRAWER BOX STARTS -->
+    <section class="nav-drawer-holder">
+    </section>
+    <!-- NAVIGATION DRAWER BOX ENDS -->
+
+    <!-- MAIN STARTS -->
+    <main>
+        <!-- HEADER STARTS -->
+        <header>
+            <h1 class="center-mob fs-600">Edit Profile and Settings</h1>
+            <button class="icon mobile-only"><a href="#settings_sec"><i class="bi bi-gear"></i></a></button>
+            <button class="ghost desk-only"><a href="#settings_sec"><i class="bi bi-gear"></i> Settings</a></button>
+        </header>
+        <!-- HEADER ENDS -->
+
+        <!-- EDIT PROFILE SECTION STARTS -->
+        <section class="edit-profile-sec">
+            <!-- EDIT AVATAR SECTION STARTS -->
+            <section class="edit-avatar-sec">
+                <!-- Current Avatar  -->
+                <picture class="avatar center">
+                    <button class="ghost edit-avatar-btn mobile-only"><i class="bi bi-person-gear"></i> Change Avatar</button>
+                </picture>
+
+                <!-- Choose Avatar Section  -->
+                <section class="choose-avatar-sec">
+                    <!-- Avatar Radio's Array -->
+                    <form class="avatar-radios-box">
+                        <fieldset>
+                            <label>
+                                Choose Avatar
+                                <button class="text keep-avatar-btn mobile-only" style="margin-left: auto;"><i class="bi bi-x"></i> Close</button>
+                            </label>
+                            <div class="check-radio-box">
+                                
+                            </div>
+                        </fieldset>
+                    </form>
+
+                </section>
+            </section>
+            <!-- EDIT AVATAR SECTION ENDS -->
+        </section>
+        <!-- EDIT PROFILE SECTION ENDS -->
+
+    </main>
+    <!-- MAIN ENDS -->
+
+
+    <!-- Script -->
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/settings.js"></script>
+</body>
+
+</html>

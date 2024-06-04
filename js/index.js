@@ -15,82 +15,124 @@ const CURRENT_FILE_NAME = getCurrentFileName();
     COMPONENTS HTML CODE
 /////////////// */
 
-const COMP_NAV_DRAWER = `
-<!-- NAVIGATION DRAWER STARTS -->
+let COMP_NAV_DRAWER = ``;
+
+if (CURRENT_USER) {
+
+    COMP_NAV_DRAWER = `
+    <!-- NAVIGATION DRAWER STARTS -->
     <nav class="nav-drawer">
     
-        <!-- LOGO and Close Button -->
-        <header class="nav-header">
-            <button class="icon nav-close-btn"><i class="bi bi-arrow-left"></i></button>
-        </header>
-        <div class="divider"></div>
+    <!-- LOGO and Close Button -->
+    <header class="nav-header">
+    <button class="icon nav-close-btn"><i class="bi bi-arrow-bar-left"></i></button>
+    </header>
+    <div class="divider"></div>
     
-        <section class="menu-holder">
+    <section class="menu-holder">
     
     
-            <!-- User Avatar, Name, Email and Settings link -->
-            <menu id="menu_user_info">
-                <a class="menu-item ${CURRENT_FILE_NAME == "edit-profile.html" ? "active" : ""}" href="./edit-profile.html">
-                    <picture class="avatar avatar-column"><img src="./assets/avatars/${CURRENT_USER.avatar}" alt="${CURRENT_USER.full_name}">
-                    </picture>
-                    <span class="info-column">
-                        <span class="name">${CURRENT_USER.full_name}</span>
-                        <span class="email fs-300">${CURRENT_USER.email}</span>
-                    </span>
-                    <button class="icon settings-btn"><i class="bi bi-gear"></i></button>
-                </a>
-            </menu>
+    <!-- User Avatar, Name, Email and Settings link -->
+    <menu id="menu_user_info">
+    <a class="menu-item ${CURRENT_FILE_NAME == "settings.html" ? "active" : ""}" href="./settings.html">
+    <picture class="avatar avatar-column"></picture>
+    <span class="info-column">
+    <span class="name">${CURRENT_USER.full_name}</span>
+    <span class="email fs-300">${CURRENT_USER.email}</span>
+    </span>
+    <button class="icon settings-btn"><i class="bi bi-gear"></i></button>
+    </a>
+    </menu>
     
-            <!-- Pages Menu -->
-            <menu id="menu_pages">
+    <!-- Pages Menu -->
+    <menu id="menu_pages">
                 <a class="menu-item ${CURRENT_FILE_NAME == "index.html" ? "active" : ""}" href="./index.html">
-                    <span class="icon"><i class="bi bi-grid-1x2"></i></span>
-                    <span class="icon filled"><i class="bi bi-grid-1x2-fill"></i></span> Habits
+                <span class="icon"><i class="bi bi-grid-1x2"></i></span>
+                <span class="icon filled"><i class="bi bi-grid-1x2-fill"></i></span> Habits
                 </a>
                 <a class="menu-item ${CURRENT_FILE_NAME == "to-do.html" ? "active" : ""}" href="#">
-                    <span class="icon"><i class="bi bi-check-square"></i></span>
-                    <span class="icon filled"><i class="bi bi-check-square-fill"></i></span> To-do
+                <span class="icon"><i class="bi bi-check-square"></i></span>
+                <span class="icon filled"><i class="bi bi-check-square-fill"></i></span> To-do
                 </a>
                 <a class="menu-item ${CURRENT_FILE_NAME == "notebook.html" ? "active" : ""}" href="#">
-                    <span class="icon"><i class="bi bi-sticky"></i></span>
-                    <span class="icon filled"><i class="bi bi-sticky-fill"></i></span> Notebook
+                <span class="icon"><i class="bi bi-sticky"></i></span>
+                <span class="icon filled"><i class="bi bi-sticky-fill"></i></span> Notebook
                 </a>
                 <a class="menu-item ${CURRENT_FILE_NAME == "statistics.html" ? "active" : ""}" href="#">
-                    <span class="icon"><i class="bi bi-bar-chart-line"></i></span>
-                    <span class="icon filled"><i class="bi bi-bar-chart-line-fill"></i></span> Statistics
+                <span class="icon"><i class="bi bi-bar-chart-line"></i></span>
+                <span class="icon filled"><i class="bi bi-bar-chart-line-fill"></i></span> Statistics
                 </a>
                 <a class="menu-item ${CURRENT_FILE_NAME == "journal.html" ? "active" : ""}" href="#">
-                    <span class="icon"><i class="bi bi-journal-bookmark"></i></span>
-                    <span class="icon filled"><i class="bi bi-journal-bookmark-fill"></i></span> Journal
+                <span class="icon"><i class="bi bi-journal-bookmark"></i></span>
+                <span class="icon filled"><i class="bi bi-journal-bookmark-fill"></i></span> Journal
                 </a>
                 <a class="menu-item ${CURRENT_FILE_NAME == "challeges.html" ? "active" : ""}" href="#">
-                    <span class="icon"><i class="bi bi-flag"></i></span>
-                    <span class="icon filled"><i class="bi bi-flag-fill"></i></span> Challenges
+                <span class="icon"><i class="bi bi-flag"></i></span>
+                <span class="icon filled"><i class="bi bi-flag-fill"></i></span> Challenges
                 </a>
-            </menu>
-    
-    
-        </section>
-    
-        <div class="divider"></div>
-    
-        <menu class="nav-footer">
-            <p class="fs-300">© Vedant Mali</p>
-            <p class="fs-200">
+                </menu>
+                
+                
+                </section>
+                
+                <div class="divider"></div>
+                
+                <menu class="nav-footer">
+                <p class="fs-300">© Vedant Mali</p>
+                <p class="fs-200">
                 <a href="#">About</a>
                 <a href="https://github.com/vedantmali05/">GitHub</a>
                 <a href="#">Terms</a>
                 <a href="#">Policy</a>
-            </p>
-        </menu>
-        <div class="divider"></div>
-        <button class="menu-item logout-btn text" name="logout-btn"> <i class="bi bi-door-open"></i> Logout</button>
-    
-    </nav>
-    <!-- NAVIGATION DRAWER ENDS -->
-`;
+                </p>
+                </menu>
+                <div class="divider"></div>
+                <button class="menu-item logout-btn text" name="logout-btn"> <i class="bi bi-door-open"></i> Logout</button>
+                
+                </nav>
+                <!-- NAVIGATION DRAWER ENDS -->
+                `;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* ///////////////
+        NAVIGATION DRAWER
+    /////////////// */
+
+
+    let navDrawerHolder = this.querySelector(".nav-drawer-holder");
+    if (navDrawerHolder) {
+        navDrawerHolder.innerHTML = COMP_NAV_DRAWER;
+
+        // OPEN NAV button
+        let navOpenBtn = this.createElement("button");
+        navOpenBtn.classList.add("icon", "nav-open-btn");
+        navOpenBtn.innerHTML = `<i class="bi bi-list"></i>`;
+        navDrawerHolder.parentNode.append(navOpenBtn);
+
+        navOpenBtn = this.querySelector(".nav-open-btn");
+        navOpenBtn.addEventListener("click", function () {
+            navDrawerHolder.classList.add("visible");
+        })
+
+
+        // CLOSE NAV when clicked on SCRIM
+        // navDrawerHolder.classList.add("visible")
+        navDrawerHolder.addEventListener("click", function (event) {
+            if (!event.target.closest(".nav-drawer")) {
+                navDrawerHolder.classList.remove("visible");
+            }
+        })
+
+        // CLOSE NAV when clicked on NAV-CLOSE-BTN
+        let navCloseBtn = this.querySelector(".nav-close-btn");
+        navCloseBtn.addEventListener("click", function () {
+            navDrawerHolder.classList.remove("visible");
+        })
+    }
+
+
 
     /* ///////////////
         POPULATE LOGO
@@ -126,6 +168,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         logo.appendChild(img);
     });
+
+    /* ///////////////
+        POPULATE AVATAR
+    /////////////// */
+
+    let pictureAvatarArray = this.querySelectorAll(".avatar");
+
+    pictureAvatarArray.forEach(elem => {
+        let img = this.createElement("img");
+        img.src = `./assets/avatars/${CURRENT_USER.avatar}`;
+        img.alt = CURRENT_USER.full_name.split(" ")[0];
+        elem.appendChild(img);
+    })
 
 
     /* ///////////////
@@ -169,49 +224,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ///////////////
-        NAVIGATION DRAWER
-    /////////////// */
-
-
-    let navDrawerHolder = this.querySelector(".nav-drawer-holder");
-    if (navDrawerHolder) {
-        navDrawerHolder.innerHTML = COMP_NAV_DRAWER;
-
-        // OPEN NAV button
-        let navOpenBtn = this.createElement("button");
-        navOpenBtn.classList.add("icon", "nav-open-btn");
-        navOpenBtn.innerHTML = `<i class="bi bi-list"></i>`;
-        navDrawerHolder.parentNode.append(navOpenBtn);
-
-        navOpenBtn = this.querySelector(".nav-open-btn");
-        navOpenBtn.addEventListener("click", function () {
-            navDrawerHolder.classList.add("visible");
-        })
-
-        // <button class="icon nav-close-btn"><i class="bi bi-arrow-left"></i></button>
-
-        // CLOSE NAV when clicked on SCRIM
-        // navDrawerHolder.classList.add("visible")
-        navDrawerHolder.addEventListener("click", function (event) {
-            if (!event.target.closest(".nav-drawer")) {
-                navDrawerHolder.classList.remove("visible");
-            }
-        })
-
-        // CLOSE NAV when clicked on NAV-CLOSE-BTN
-        let navCloseBtn = this.querySelector(".nav-close-btn");
-        navCloseBtn.addEventListener("click", function () {
-            navDrawerHolder.classList.remove("visible");
-        })
-    }
-
-
-    /* ///////////////
         LOGOUT BUTTON
     /////////////// */
 
-    let logoutBtnArr = this.querySelectorAll(".logout-btn")
-    logoutBtnArr.forEach(btn => {
+    let logoutBtnArray = this.querySelectorAll(".logout-btn")
+    logoutBtnArray.forEach(btn => {
         btn.addEventListener("click", function (e) {
             e.preventDefault();
 

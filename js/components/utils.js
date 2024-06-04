@@ -145,7 +145,7 @@ export class User extends Settings {
             this.email = email;
             this.password = "";
             this.bio = "";
-            this.avatar = "avatar-boy-6.svg";
+            this.avatar = "avatar-2.svg";
             this.created_time = Date.now();
         }
     }

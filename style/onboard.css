@@ -1,3 +1,7 @@
+body {
+  display: block !important;
+}
+
 main {
   display: flex;
   height: 100vh;
