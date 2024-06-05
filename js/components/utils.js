@@ -265,12 +265,12 @@ export function createSnackbar(options = {}) {
     const { msg, status = UI_STATUS_FEEDBACK.tip, undo } = options;
 
     // ERROR CONDITIONS - msg must exist
-    if (!msg) throw new Error("Provide a message for snackbar");
+    if (!msg) throw new Error("Provide a message for Snackbar");
 
     // SNACKBAR CONSTRUCTION
     let snackbar = document.createElement("div");
     snackbar.classList.add("snackbar", status)
-    
+
     // Close button, if undo() exists, else just close
     let closeBtn = undo
         ? `<button class="text close-snackbar-btn undo-btn">Undo</button>`
@@ -292,6 +292,66 @@ export function createSnackbar(options = {}) {
         // SNACKBAR CLOSING - On Click - Add animation and remove
         snackbar.classList.add("exit");
         setTimeout(() => snackbar.remove(), 500);
+    })
+}
+
+
+//  DIALOG BOX COMPONENT CREATOR
+
+export function createDialog(options = {}) {
+    // INITIALIZATION - Set default options and handle mandatory conditons
+    const { illustration, headline, description, componentID, primaryBtnLabel = "Continue", secondaryBtnLabel = "Cancel", primaryAction, secondaryAction } = options;
+    if (!headline) throw new Error("Provide a headline for Dialog");
+    if (!description) throw new Error("Provide a description for Dialog");
+
+    // SAVE A COPY OF COMPONENT - Component will be restored to the DOM once used
+    const component = document.querySelector(`[data-dialog-id="${componentID}"]`);
+    const componentCopy = component?.cloneNode(true);
+    component.remove();
+    componentCopy.setAttribute("aria-hidden", "false");
+
+    // Dialog content construction (template literal)
+    const dialogSec = document.createElement("section");
+    dialogSec.classList.add("dialog-sec");
+    dialogSec.innerHTML = `
+    <section class="dialog">
+        <h3 class="fs-500 center">${headline}</h3>
+        <section class="dialog-body">
+            ${illustration ? `<div><picture class="center dialog-illus"><img src="./assets/illus/${illustration}"></picture></div>` : ""}
+            ${description ? `<div><p class="msg subtitle center">${description}</p></div>` : ""}
+            ${componentCopy ? `<div class="dialog-component">${componentCopy?.outerHTML}</div>` : ""}
+        </section>
+        <div class="btn-box">
+            ${secondaryBtnLabel !== false ? `<button class="ghost secondary-btn">${secondaryBtnLabel}</button>` : ""}
+            <button class="primary primary-btn">${primaryBtnLabel}</button>
+        </div>
+    </section>
+  `;
+
+    // Add dialog and set aria-hidden for component
+    document.body.prepend(dialogSec);
+
+    // Function Remove Dialog box
+    function removeDialogBox() {
+        document.body.prepend(component);
+        document.body.querySelector(".dialog-sec").remove();
+    }
+
+
+    // CLOSE DIALOG BY CANCEL BUTTON PRESS
+    let secondaryBtn = dialogSec.querySelector(".secondary-btn");
+
+    secondaryBtn.addEventListener("click", function () {
+        secondaryAction();
+        removeDialogBox();
+    })
+
+    // CLOSE DIALOG BY PRIMARY BUTTON PRESS
+    let primaryBtn = dialogSec.querySelector(".primary-btn");
+
+    primaryBtn.addEventListener("click", function () {
+        primaryAction();
+        removeDialogBox();
     })
 }
 

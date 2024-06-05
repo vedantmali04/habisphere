@@ -10,7 +10,7 @@ import {
     UI_STATUS_FEEDBACK
 } from "./components/data.js";
 import { User, removeInputMsg, setInputMsg, validateInput } from "./components/utils.js";
-import { createSnackbar } from "./components/utils.js";
+import { createSnackbar, createDialog } from "./components/utils.js";
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
 
@@ -195,5 +195,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     })
+
+    let changePasswordBtn = this.querySelector("#change_password_btn");
+
+    changePasswordBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        createDialog({
+            headline: "Update Password",
+            description: `Updating your account password regularly keeps your account safe from constant access and account breaches. Set a strong yet easy to remember password for you!`,
+            componentID: "change_password",
+            primaryBtnLabel: `Change Password`,
+            secondaryAction: function () { },
+            primaryAction: function () { }
+        });
+
+    })
+
+    changePasswordBtn.click();
+
 
 })

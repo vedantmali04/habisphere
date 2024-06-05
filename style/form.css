@@ -17,7 +17,7 @@ button {
   font-family: var(--ff-def);
   text-transform: capitalize;
   letter-spacing: 1.1px;
-  color: var(--clr-text-grey);
+  color: var(--clr-text-grey-dark);
   background-color: transparent;
   width: calc(100% - 0.8rem);
   margin: 0.4rem;
@@ -175,7 +175,7 @@ fieldset {
 }
 
 fieldset label {
-  color: var(--clr-text-grey);
+  color: var(--clr-text-grey-dark);
   font-size: var(--fs-300);
   justify-content: space-between !important;
 }
@@ -202,7 +202,7 @@ fieldset:has(:is(.text-input:focus, .text-input.filled)) label {
 }
 
 fieldset label .counter {
-  color: var(--clr-text-grey);
+  color: var(--clr-text-grey-dark);
 }
 
 fieldset .text-input {
@@ -352,7 +352,7 @@ fieldset .check-radio-box input[type="checkbox"] {
   text-align: start !important;
   position: relative;
   font-size: var(--fs-300);
-  color: var(--clr-text-grey);
+  color: var(--clr-text-grey-dark);
   margin: 0.2rem 0;
 }
 

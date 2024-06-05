@@ -11,7 +11,8 @@ IMPORTS and SETUPS
 :root {
   /* Colors */
   --clr-text-black: #000000;
-  --clr-text-grey: #111111;
+  --clr-text-grey-dark: #111111;
+  --clr-text-grey-light: #5b5b5b;
 
   --clr-bg-white: #f7f7f7;
   --clr-bg-grey: #ebebeb;
@@ -147,7 +148,7 @@ h6 {
   font-weight: 700;
   margin-bottom: 0.8rem;
   font-family: var(--ff-head);
-  color: var(--clr-text-grey);
+  color: var(--clr-text-grey-dark);
 }
 
 .ff-head {

@@ -71,8 +71,8 @@
                 <!-- Full Name -->
                 <fieldset>
                     <label for="settings_fullname">Full Name</label>
-                    <input type="text" id="settings_fullname" name="settings_fullname" autocomplete="name" autofocus
-                        required pattern="([A-Za-z]+){2,}\s+([A-Za-z]+)(?:\s+([A-Za-z]+){2,})?$"
+                    <input type="text" id="settings_fullname" name="settings_fullname" autocomplete="name" required
+                        pattern="([A-Za-z]+){2,}\s+([A-Za-z]+)(?:\s+([A-Za-z]+){2,})?$"
                         style="text-transform: capitalize;">
                 </fieldset>
 
@@ -112,12 +112,43 @@
             </form>
             <!-- EDIT INFO SECTION ENDS -->
 
-
         </section>
         <!-- EDIT PROFILE SECTION ENDS -->
 
     </main>
     <!-- MAIN ENDS -->
+
+
+    <form data-dialog-id="change_password" aria-hidden="true">
+        <!-- Old Password -->
+        <fieldset>
+            <label for="settings_old_password">Old Password</label>
+            <input type="password" id="settings_old_password" name="settings_old_password"
+                autocomplete="current-password" required>
+        </fieldset>
+        <!-- New Password -->
+        <fieldset>
+            <label for="settings_new_password">New Password</label>
+            <input type="password" id="settings_new_password" name="settings_new_password" autocomplete="new-password"
+                pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$" required>
+        </fieldset>
+        <!-- Password Guidelines -->
+        <div class="subtitle note center-mob">
+            <span>
+                <p>A password must be 7 to 16 characters long. It must contain - </p>
+                <p>At least one lowercase alphabet</p>
+                <p>At least one uppercase alphabet</p>
+                <p>At least one number and symbol</p>
+                <p>Password must not contain spaces.</p>
+            </span>
+        </div>
+        <!-- Confirm Password -->
+        <fieldset>
+            <label for="settings_confirm_password">Confirm Password</label>
+            <input type="password" id="settings_confirm_password" name="settings_confirm_password" required>
+        </fieldset>
+    </form>
+
 
 
     <!-- Script -->
