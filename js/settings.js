@@ -10,6 +10,7 @@ import {
     UI_STATUS_FEEDBACK
 } from "./components/data.js";
 import { User, removeInputMsg, setInputMsg, validateInput } from "./components/utils.js";
+import { createSnackbar } from "./components/utils.js";
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
 
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
     /* ///////////////
-        UPDATE ACCOUNT INFORMATION - EDIT INFO SEC
+    UPDATE ACCOUNT INFORMATION - EDIT INFO SEC
     /////////////// */
 
     let fullnameInput = this.querySelector("#settings_fullname");
@@ -120,13 +121,16 @@ document.addEventListener("DOMContentLoaded", function () {
     saveChangesBtn.addEventListener("click", function (e) {
         e.preventDefault();
 
+        // Remove previous messages, if any
         removeInputMsg(this, UI_STATUS_FEEDBACK.tip)
 
+        // Initialize with input values
         let inputFullname = fullnameInput.value;
         let inputUsername = usernameInput.value;
         let inputBio = bioInput.value;
         let inputEmail = emailInput.value;
 
+        // If details aren't updated, give feedback and return
         if (
             inputFullname == fullname &&
             inputUsername == username &&
@@ -140,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // Validate all inputs
         let validationArray = [];
 
         validationArray.push(validateInput(fullnameInput, "Must be first, middle (optional) and last name."));
@@ -150,24 +155,42 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!validationArray.includes(false)) {
             validationArray = [];
 
-            // If username is already taken
+            // If new username is already taken
             if (new User().getUserBasedOnKey("username", inputUsername) && inputUsername != username) {
                 setInputMsg(usernameInput, "This username is already taken");
                 validationArray.push(false);
             }
 
-            // If email is already exists
+            // If new email is already taken
             if (new User().getUserBasedOnKey("email", inputEmail) && inputEmail != email) {
                 setInputMsg(emailInput, `This  email is already taken`);
                 validationArray.push(false);
             }
 
             if (!validationArray.includes(false)) {
+
+                // Give user feedback about the update, and provide UNDO option
+                createSnackbar({
+                    msg: "Account details updated", status: UI_STATUS_FEEDBACK.success, undo: function () {
+                        // Resetting updates on UNDO button clicked
+                        fullnameInput.value = fullname;
+                        usernameInput.value = username;
+                        bioInput.value = bio;
+                        emailInput.value = email;
+                        CURRENT_USER.full_name = fullnameInput.value;
+                        CURRENT_USER.username = usernameInput.value;
+                        CURRENT_USER.bio = bioInput.value;
+                        CURRENT_USER.email = emailInput.value;
+                        CURRENT_USER = new User().updateUser(CURRENT_USER);
+                        return;
+                    }
+                });
                 CURRENT_USER.full_name = fullnameInput.value;
                 CURRENT_USER.username = usernameInput.value;
                 CURRENT_USER.bio = bioInput.value;
                 CURRENT_USER.email = emailInput.value;
                 CURRENT_USER = new User().updateUser(CURRENT_USER);
+
             }
 
         }

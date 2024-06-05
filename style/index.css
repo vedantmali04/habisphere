@@ -457,7 +457,6 @@ SNACKBAR
   width: 100%;
   max-width: 43.2rem;
   z-index: 20;
-  border: 1px solid red;
   overflow: hidden;
 }
 

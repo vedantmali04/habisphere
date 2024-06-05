@@ -95,23 +95,6 @@ if (CURRENT_USER) {
                 `;
 }
 
-/* ///////////////
-    SNACKBAR GENERATION FUNCTION
-/////////////// */
-
-function snackbarGenerate(msg, status = UI_STATUS_FEEDBACK.tip, undoBtn = false) {
-    let snackbarSec = document.querySelector(".snackbar-sec");
-
-    let snackbar = document.createElement("div");
-    snackbar.classList.add("snackbar", status)
-    snackbar.innerHTML = `
-        <p class="fs-400 msg">This is a message</p>
-        <button class="icon"><i class="bi bi-x-lg"></i></button>
-    `;
-
-}
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ///////////////
@@ -217,9 +200,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     inputArray.forEach(input => {
         input.classList.add("text-input");
-        input.classList.add(input.value ? "filled" : "unfilled");
+        input.classList.toggle("filled", input.value);
 
         input.addEventListener("blur", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("change", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("input", function () {
             input.classList.toggle("filled", input.value)
         });
 

@@ -197,20 +197,7 @@ export function setInputMsg(inputTag, msg, status = UI_STATUS_FEEDBACK.error) {
     // Create message div
     const msgDiv = document.createElement("div");
     // Set class, by default, it's "error"
-    let className = UI_CLASSES.error;
-    switch (status) {
-        case UI_STATUS_FEEDBACK.tip:
-            className = UI_CLASSES.tip;
-            break;
-
-        case UI_STATUS_FEEDBACK.success:
-            className = UI_CLASSES.success;
-            break;
-
-        default:
-            break;
-    }
-    msgDiv.classList.add("msg", className);
+    msgDiv.classList.add("msg", status);
     msgDiv.innerHTML = `<span>${msg}</span>`;
 
     // Find parent for appending
@@ -222,20 +209,7 @@ export function setInputMsg(inputTag, msg, status = UI_STATUS_FEEDBACK.error) {
 export function removeInputMsg(inputTag, status = UI_STATUS_FEEDBACK.error) {
     const fieldset = getParentElement(inputTag, UI_CLASSES.fieldset);
     // Get type of msg to be deleted, by default, "error"
-    let className = UI_CLASSES.error;
-    switch (status) {
-        case UI_STATUS_FEEDBACK.tip:
-            className = UI_CLASSES.tip;
-            break;
-
-        case UI_STATUS_FEEDBACK.success:
-            className = UI_CLASSES.success;
-            break;
-
-        default:
-            break;
-    }
-    fieldset.querySelectorAll("." + className).forEach(div => div.remove());
+    fieldset.querySelectorAll("." + status).forEach(div => div.remove());
 }
 
 // FUNCTION for INPUT VALIDATION
@@ -277,6 +251,48 @@ export function validateToggleInputs(toggleInputs, msg = "This field is required
 export function setInputValue(inputTag, value = "") {
     inputTag.classList.toggle("filled", value !== "");
     inputTag.value = value;
+}
+
+
+/* ///////////////
+    OTHER COMPONENTS FUNCTIONS
+/////////////// */
+
+//     SNACKBAR GENERATION FUNCTION
+
+export function createSnackbar(options = {}) {
+    // OPTION DEFAULTS
+    const { msg, status = UI_STATUS_FEEDBACK.tip, undo } = options;
+
+    // ERROR CONDITIONS - msg must exist
+    if (!msg) throw new Error("Provide a message for snackbar");
+
+    // SNACKBAR CONSTRUCTION
+    let snackbar = document.createElement("div");
+    snackbar.classList.add("snackbar", status)
+    
+    // Close button, if undo() exists, else just close
+    let closeBtn = undo
+        ? `<button class="text close-snackbar-btn undo-btn">Undo</button>`
+        : `<button class="icon close-snackbar-btn"><i class="bi bi-x-lg"></i></button>`;
+
+    // Add inner content and add itself to DOM
+    snackbar.innerHTML = `<p class="fs-400 msg">${msg}</p> ${closeBtn}`;
+    document.querySelector(".snackbar-sec").prepend(snackbar);
+
+    // SNACKBAR CLOSING - Automatic - Add animation and remove
+    setTimeout(() => snackbar.classList.add("exit"), 4500);
+    setTimeout(() => snackbar.remove(), 5000);
+
+    // Snackbar Closing - On close / undo button click
+    closeBtn = snackbar.querySelector(".close-snackbar-btn");
+    closeBtn.addEventListener("click", function () {
+        if (undo) undo();
+
+        // SNACKBAR CLOSING - On Click - Add animation and remove
+        snackbar.classList.add("exit");
+        setTimeout(() => snackbar.remove(), 500);
+    })
 }
 
 

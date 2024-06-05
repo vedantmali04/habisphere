@@ -196,14 +196,6 @@ fieldset:has(.text-input:hover, .text-input:focus) label {
   color: var(--clr-accent);
 }
 
-fieldset:has(.text-input:hover) label {
-  background-color: var(--clr-primary-hover);
-}
-
-fieldset:has(.text-input:focus) label {
-  background-color: var(--clr-primary-focus);
-}
-
 fieldset:has(:is(.text-input:focus, .text-input.filled)) label {
   font-size: var(--fs-200);
   padding: 0.2rem 1.6rem;

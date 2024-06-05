@@ -55,9 +55,9 @@ export const STATUS_HTTP_RESPONSE = {
 
 // Input Status
 export const UI_STATUS_FEEDBACK = {
-    error: -1,
-    tip: 0,
-    success: 1
+    error: "error",
+    tip: "tip",
+    success: "success"
 }
 
 // User THEME
