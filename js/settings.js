@@ -211,8 +211,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     })
-
-    changePasswordBtn.click();
-
-
 })
