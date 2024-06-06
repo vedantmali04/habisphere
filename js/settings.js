@@ -122,7 +122,11 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         // Remove previous messages, if any
-        removeInputMsg(this, UI_STATUS_FEEDBACK.tip)
+        removeInputMsg(this, UI_STATUS_FEEDBACK.tip);
+        removeInputMsg(fullnameInput);
+        removeInputMsg(usernameInput);
+        removeInputMsg(bioInput);
+        removeInputMsg(emailInput);
 
         // Initialize with input values
         let inputFullname = fullnameInput.value;
@@ -212,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
             description: `Updating your account password regularly keeps your account safe from constant access and account breaches. Set a strong yet easy to remember password for you!`,
             componentID: "reset_password",
             primaryBtnLabel: `Reset`,
-            fullscreen: false,
+            fullscreen: true,
             secondaryAction: function () {
                 createSnackbar({ msg: "Password reset cancelled." })
             },
