@@ -118,3 +118,10 @@ fieldset {
   background-color: var(--clr-bg-white);
   padding: 1.6rem;
 }
+
+.password-visibility-btn {
+  position: absolute;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}

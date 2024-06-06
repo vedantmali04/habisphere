@@ -9,7 +9,7 @@ import {
     UI_SIZE,
     UI_STATUS_FEEDBACK
 } from "./components/data.js";
-import { User, removeInputMsg, setInputMsg, validateInput } from "./components/utils.js";
+import { User, refreshInputs, removeInputMsg, setInputMsg, setInputValue, validateInput } from "./components/utils.js";
 import { createSnackbar, createDialog } from "./components/utils.js";
 import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (!validationArray.includes(false)) {
 
+                saveChangesBtn.disabled = true;
                 // Give user feedback about the update, and provide UNDO option
                 createSnackbar({
                     msg: "Account details updated", status: UI_STATUS_FEEDBACK.success, undo: function () {
@@ -182,6 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         CURRENT_USER.bio = bioInput.value;
                         CURRENT_USER.email = emailInput.value;
                         CURRENT_USER = new User().updateUser(CURRENT_USER);
+                        saveChangesBtn.disabled = false;
+                        window.location.reload();
                         return;
                     }
                 });
@@ -190,24 +193,80 @@ document.addEventListener("DOMContentLoaded", function () {
                 CURRENT_USER.bio = bioInput.value;
                 CURRENT_USER.email = emailInput.value;
                 CURRENT_USER = new User().updateUser(CURRENT_USER);
-
+                setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
             }
 
         }
     })
 
-    let changePasswordBtn = this.querySelector("#change_password_btn");
+    let resetPasswordBtn = this.querySelector("#reset_password_btn");
 
-    changePasswordBtn.addEventListener("click", function (e) {
+    resetPasswordBtn.addEventListener("click", function (e) {
         e.preventDefault();
 
-        createDialog({
-            headline: "Update Password",
+
+        let isPasswordUpdated = createDialog({
+            headline: "Reset Password",
             description: `Updating your account password regularly keeps your account safe from constant access and account breaches. Set a strong yet easy to remember password for you!`,
-            componentID: "change_password",
-            primaryBtnLabel: `Change Password`,
-            secondaryAction: function () { },
-            primaryAction: function () { }
+            componentID: "reset_password",
+            primaryBtnLabel: `Reset`,
+            fullscreen: false,
+            secondaryAction: function () {
+                createSnackbar({ msg: "Password reset cancelled." })
+            },
+            primaryAction: function () {
+
+                refreshInputs();
+
+                // GET ALL PASSWORD INPUT TAGS
+                let currentPasswordInput = document.getElementById("settings_current_password");
+                let newPasswordInput = document.getElementById("settings_new_password");
+                let confirmPasswordInput = document.getElementById("settings_confirm_password");
+
+                // REMOVE PRESET MESSAGES IF ANY
+                removeInputMsg(currentPasswordInput);
+                removeInputMsg(newPasswordInput);
+                removeInputMsg(confirmPasswordInput);
+
+                // FLAG ARRAY - Must contain all True values to proceed
+                let validationArray = [];
+
+                // VALIDATE CURRENT PASSWORD - IF EMPTY and MATCHES WITH CURRENT PASSWORD
+                validationArray.push(validateInput(currentPasswordInput))
+                if (validationArray[0]) {
+                    if (CURRENT_USER.password !== currentPasswordInput.value) {
+                        setInputMsg(currentPasswordInput, "Current Password didn't match");
+                        validationArray.push(false);
+                    }
+                }
+
+                validationArray.push(validateInput(newPasswordInput, "Please choose a strong password"));
+                validationArray.push(validateInput(confirmPasswordInput));
+
+                if (confirmPasswordInput.value && confirmPasswordInput.value != newPasswordInput.value) {
+                    setInputMsg(confirmPasswordInput, "Passwords doesn't match")
+                    validationArray.push(false);
+                }
+
+                if (CURRENT_USER.password == newPasswordInput.value) {
+                    setInputMsg(newPasswordInput, "Old password and New Password cannot be same");
+                }
+
+                if (!validationArray.includes(false)) {
+                    CURRENT_USER.password = newPasswordInput.value;
+                    CURRENT_USER = new User().updateUser(CURRENT_USER);
+                    createSnackbar({
+                        msg: "Password updated",
+                        status: UI_STATUS_FEEDBACK.success,
+                    })
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }
         });
 
     })

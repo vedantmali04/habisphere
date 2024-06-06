@@ -478,12 +478,12 @@ SNACKBAR COMPONENT
   margin: 0.4rem 0;
   justify-content: space-between;
   padding: 0.4rem 1.2rem;
-  animation: snackbarEntry 0.5s linear;
+  animation: fadeScaleUpIn 0.5s linear;
   overflow: hidden;
 }
 
 .snackbar.exit {
-  animation: snackbarExit 0.5s linear;
+  animation: fadeScaleOut 0.5s linear;
 }
 
 .snackbar.error {
@@ -515,42 +515,6 @@ SNACKBAR COMPONENT
   gap: 0.8rem;
 }
 
-@keyframes snackbarEntry {
-  0% {
-    opacity: 0;
-    scale: 0.9;
-    translate: 0 50%;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-    scale: 1;
-    translate: 0 0%;
-  }
-}
-
-@keyframes snackbarExit {
-  0% {
-    opacity: 1;
-    scale: 1;
-    max-height: 100rem;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 0;
-    scale: 0.9;
-    max-height: 0rem;
-  }
-}
-
 /* /////////////////////////
 DIALOG COMPONENT
 ///////////////////////// */
@@ -564,6 +528,13 @@ DIALOG COMPONENT
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dialog-sec.fullscreen {
+  background-color: var(--clr-bg-grey);
+  overflow-y: auto;
+  height: 100vh;
+  align-items: start;
 }
 
 .dialog {
@@ -581,6 +552,15 @@ DIALOG COMPONENT
   padding: 2.4rem;
 }
 
+.dialog-sec.fullscreen .dialog {
+  margin: 0;
+  width: 100%;
+  max-height: fit-content;
+  border-radius: 0;
+  padding: 2.4rem;
+  overflow: visible;
+}
+
 .dialog .dialog-body {
   display: flex;
   flex-direction: column;
@@ -589,6 +569,12 @@ DIALOG COMPONENT
   overflow-y: auto;
   height: 100%;
   padding: 1.6rem;
+  background-color: var(--clr-bg-grey);
+  border-radius: 1.6rem;
+}
+
+.dialog-sec.fullscreen .dialog-body {
+  overflow-y: visible;
 }
 
 .dialog .dialog-illus {
@@ -603,9 +589,86 @@ DIALOG COMPONENT
   display: flex;
   gap: 0.8rem;
   padding-top: 1.6rem;
-  border-top: 1px solid var(--clr-divider);
 }
 
 .dialog .btn-box > * {
   width: 100%;
+}
+
+.dialog-sec .dialog-component {
+  background-color: var(--clr-bg-white);
+  border-radius: 1.6rem;
+  padding: 0.4rem 0.8rem;
+}
+
+@keyframes fadeIn {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeScaleDownIn {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+    translate: 0 -50%;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0%;
+  }
+}
+
+@keyframes fadeScaleUpIn {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+    translate: 0 50%;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+    translate: 0 0%;
+  }
+}
+
+@keyframes fadeScaleOut {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+    scale: 0.9;
+  }
 }

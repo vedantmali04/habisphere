@@ -6,7 +6,7 @@ import {
     UI_SIZE,
     UI_STATUS_FEEDBACK
 } from "./components/data.js";
-import { saveToStorage, getFromStorage, generateUniqueID } from "./components/utils.js";
+import { saveToStorage, getFromStorage, generateUniqueID, refreshInputs } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
 
 let CURRENT_USER = getFromStorage(STORAGE_KEY.current_user)[0];
@@ -194,50 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ///////////////
     POPULATE INPUT CLASSES and HANDLE UI EFFECTS
     /////////////// */
-
-    // FILLABLE INPUTS (all inputs except Radios and Checkboxes)
-    let inputArray = this.querySelectorAll("input:not([type=radio]):not([type=checkbox]), .text-input");
-
-    inputArray.forEach(input => {
-        input.classList.add("text-input");
-        input.classList.toggle("filled", input.value);
-
-        input.addEventListener("blur", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        input.addEventListener("change", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        input.addEventListener("input", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        // POPULATE 👁️ Password Visibility Button if current input is Password
-        if (input.type == "password") {
-            let passwordVisibilityBtn = this.createElement("button");
-            passwordVisibilityBtn.type = "button";
-            passwordVisibilityBtn.classList.add("password-visibility-btn", "trail", "icon");
-            passwordVisibilityBtn.innerHTML = `<i class="bi bi-eye"></i><i class="bi bi-eye-slash"></i>`;
-
-            // Get Parent Element of current Password Input and  append Eye button in it.
-            getParentElement(input, UI_CLASSES.fieldset).append(passwordVisibilityBtn);
-
-            // Password Visibility Event
-            passwordVisibilityBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                input.type = input.type == "password" ? "text" : "password";
-                passwordVisibilityBtn.classList.toggle("visible", input.type != "password");
-            })
-        }
-    })
-
-    // TOGGLE INPUTS like Radio and Checkbox
-    let inputToggleArray = this.querySelectorAll("input[type=radio], input[type=checkbox]");
-    inputToggleArray.forEach(input => {
-        input.classList.add("toggle-input");
-    });
+    refreshInputs();
 
     /* ///////////////
         LOGOUT BUTTON

@@ -9,6 +9,53 @@ import {
 DATA STORAGE FUNCTIONS
 /////////////// */
 
+// FUNCTION to REFRESH INPUT TAG PROPERTIES
+export function refreshInputs() {
+    // FILLABLE INPUTS (all inputs except Radios and Checkboxes)
+    let inputArray = document.querySelectorAll("input:not([type=radio]):not([type=checkbox]), .text-input");
+
+    inputArray.forEach(input => {
+        input.classList.add("text-input");
+        input.classList.toggle("filled", input.value);
+
+        input.addEventListener("blur", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("change", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("input", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        // POPULATE 👁️ Password Visibility Button if current input is Password
+        if (input.type == "password") {
+            let passwordVisibilityBtn = document.createElement("button");
+            passwordVisibilityBtn.type = "button";
+            passwordVisibilityBtn.classList.add("password-visibility-btn", "trail", "icon");
+            passwordVisibilityBtn.innerHTML = `<i class="bi bi-eye"></i><i class="bi bi-eye-slash"></i>`;
+
+            // Get Parent Element of current Password Input and  append Eye button in it.
+            getParentElement(input, UI_CLASSES.fieldset).append(passwordVisibilityBtn);
+
+            // Password Visibility Event
+            passwordVisibilityBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                input.type = input.type == "password" ? "text" : "password";
+                passwordVisibilityBtn.classList.toggle("visible", input.type != "password");
+            })
+        }
+    })
+
+    // TOGGLE INPUTS like Radio and Checkbox
+    let inputToggleArray = document.querySelectorAll("input[type=radio], input[type=checkbox]");
+    inputToggleArray.forEach(input => {
+        input.classList.add("toggle-input");
+    });
+}
+
 
 // FUNCTION to SAVE data to storage throughout the project
 export function saveToStorage(key, data) {
@@ -262,7 +309,11 @@ export function setInputValue(inputTag, value = "") {
 
 export function createSnackbar(options = {}) {
     // OPTION DEFAULTS
-    const { msg, status = UI_STATUS_FEEDBACK.tip, undo } = options;
+    const {
+        msg,
+        status = UI_STATUS_FEEDBACK.tip,
+        undo
+    } = options;
 
     // ERROR CONDITIONS - msg must exist
     if (!msg) throw new Error("Provide a message for Snackbar");
@@ -275,13 +326,11 @@ export function createSnackbar(options = {}) {
     let closeBtn = undo
         ? `<button class="text close-snackbar-btn undo-btn">Undo</button>`
         : `<button class="icon close-snackbar-btn"><i class="bi bi-x-lg"></i></button>`;
-
-    // Add inner content and add itself to DOM
     snackbar.innerHTML = `<p class="fs-400 msg">${msg}</p> ${closeBtn}`;
     document.querySelector(".snackbar-sec").prepend(snackbar);
 
     // SNACKBAR CLOSING - Automatic - Add animation and remove
-    setTimeout(() => snackbar.classList.add("exit"), 4500);
+    setTimeout(() => snackbar.style.animation = `fadeScaleOut 0.5s linear`, 4600);
     setTimeout(() => snackbar.remove(), 5000);
 
     // Snackbar Closing - On close / undo button click
@@ -290,7 +339,7 @@ export function createSnackbar(options = {}) {
         if (undo) undo();
 
         // SNACKBAR CLOSING - On Click - Add animation and remove
-        snackbar.classList.add("exit");
+        snackbar.style.animation = `fadeScaleOut 0.5s linear`;
         setTimeout(() => snackbar.remove(), 500);
     })
 }
@@ -300,58 +349,77 @@ export function createSnackbar(options = {}) {
 
 export function createDialog(options = {}) {
     // INITIALIZATION - Set default options and handle mandatory conditons
-    const { illustration, headline, description, componentID, primaryBtnLabel = "Continue", secondaryBtnLabel = "Cancel", primaryAction, secondaryAction } = options;
+    const {
+        illustration,
+        headline,
+        description,
+        componentID,
+        fullscreen = false,
+        primaryBtnLabel = "Continue",
+        secondaryBtnLabel = "Cancel",
+        primaryAction = function () { },
+        secondaryAction = function () { }
+    } = options;
+
     if (!headline) throw new Error("Provide a headline for Dialog");
     if (!description) throw new Error("Provide a description for Dialog");
 
-    // SAVE A COPY OF COMPONENT - Component will be restored to the DOM once used
+    // GET AND MAKE COMPONENT VISIBLE
     const component = document.querySelector(`[data-dialog-id="${componentID}"]`);
-    const componentCopy = component?.cloneNode(true);
-    component.remove();
-    componentCopy.setAttribute("aria-hidden", "false");
+    component?.setAttribute("aria-hidden", "false");
 
-    // Dialog content construction (template literal)
+    // DIALOG SECTION CONSTRUCTION
     const dialogSec = document.createElement("section");
     dialogSec.classList.add("dialog-sec");
+    if (fullscreen) dialogSec.classList.add("fullscreen")
     dialogSec.innerHTML = `
-    <section class="dialog">
-        <h3 class="fs-500 center">${headline}</h3>
-        <section class="dialog-body">
+    <section class="dialog" style="animation: fadeScaleDownIn 0.5s linear">
+    <h3 class="fs-500 center">${headline}</h3>
+    <section class="dialog-body">
             ${illustration ? `<div><picture class="center dialog-illus"><img src="./assets/illus/${illustration}"></picture></div>` : ""}
             ${description ? `<div><p class="msg subtitle center">${description}</p></div>` : ""}
-            ${componentCopy ? `<div class="dialog-component">${componentCopy?.outerHTML}</div>` : ""}
-        </section>
-        <div class="btn-box">
+            ${component ? `<div class="dialog-component">${component?.outerHTML}</div>` : ""}
+            </section>
+            <div class="btn-box">
             ${secondaryBtnLabel !== false ? `<button class="ghost secondary-btn">${secondaryBtnLabel}</button>` : ""}
             <button class="primary primary-btn">${primaryBtnLabel}</button>
-        </div>
-    </section>
-  `;
+            </div>
+            </section>
+            `;
 
-    // Add dialog and set aria-hidden for component
+    // REMOVE COMPONENT temporarily from DOM to avoid duplicancy issues before DialogSec population
+    component?.remove();
     document.body.prepend(dialogSec);
+    dialogSec.style.animation = `fadeIn 0.5s linear`;
 
-    // Function Remove Dialog box
+    refreshInputs();
+
+    // Function Remove the Dialog box
     function removeDialogBox() {
+        component?.setAttribute("aria-hidden", "true");
         document.body.prepend(component);
-        document.body.querySelector(".dialog-sec").remove();
+        dialogSec.style.animation = `fadeOut 0.5s linear`;
+        dialogSec.querySelector(".dialog").style.animation = `fadeScaleOut 0.5s linear`;
+        setTimeout(() => {
+            document.body.querySelector(".dialog-sec").remove();
+        }, 400);
     }
-
 
     // CLOSE DIALOG BY CANCEL BUTTON PRESS
     let secondaryBtn = dialogSec.querySelector(".secondary-btn");
-
     secondaryBtn.addEventListener("click", function () {
         secondaryAction();
         removeDialogBox();
+        return false;
     })
 
     // CLOSE DIALOG BY PRIMARY BUTTON PRESS
     let primaryBtn = dialogSec.querySelector(".primary-btn");
-
     primaryBtn.addEventListener("click", function () {
-        primaryAction();
-        removeDialogBox();
+        if (primaryAction()) {
+            removeDialogBox();
+            return true;
+        }
     })
 }
 

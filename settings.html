@@ -105,9 +105,8 @@
 
                 <!-- Change Password button -->
                 <fieldset>
-                    <button class="text" type="button" id="change_password_btn">Change Password</button>
+                    <button class="text" type="button" id="reset_password_btn">Reset Password</button>
                 </fieldset>
-
 
             </form>
             <!-- EDIT INFO SECTION ENDS -->
@@ -119,11 +118,11 @@
     <!-- MAIN ENDS -->
 
 
-    <form data-dialog-id="change_password" aria-hidden="true">
-        <!-- Old Password -->
+    <form data-dialog-id="reset_password" aria-hidden="true">
+        <!-- Current Password -->
         <fieldset>
-            <label for="settings_old_password">Old Password</label>
-            <input type="password" id="settings_old_password" name="settings_old_password"
+            <label for="settings_current_password">Current Password</label>
+            <input type="password" id="settings_current_password" name="settings_current_password"
                 autocomplete="current-password" required>
         </fieldset>
         <!-- New Password -->
