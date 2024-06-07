@@ -172,7 +172,7 @@ NAVIGATION DRAWER
   position: fixed;
   left: 0;
   top: 0.4rem;
-  z-index: 10;
+  z-index: 100;
   margin: 0;
   width: auto !important;
   height: 3.6rem;
@@ -193,6 +193,11 @@ NAVIGATION DRAWER
 .nav-open-btn:active {
   scale: 1 !important;
   left: -0.4rem;
+}
+
+body:has(.nav-drawer-holder.visible) .nav-open-btn {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /* Parent Navigation Drawer Holder */
@@ -223,7 +228,6 @@ NAVIGATION DRAWER
   max-width: 28rem;
   background-color: var(--clr-bg-white);
   padding: 0.4rem;
-  padding-right: 1.6rem;
   opacity: 0;
   visibility: hidden;
   left: -100%;
@@ -374,10 +378,6 @@ NAVIGATION DRAWER
     left: 1.2rem;
   }
 
-  .nav-drawer-holder.visible ~ .nav-open-btn {
-    opacity: 0;
-    visibility: hidden;
-  }
   .nav-drawer-holder,
   .nav-drawer-holder.visible,
   .nav-drawer,

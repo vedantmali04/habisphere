@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
         }
-    })
+    });
 
     let resetPasswordBtn = this.querySelector("#reset_password_btn");
 

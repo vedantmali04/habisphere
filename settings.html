@@ -15,6 +15,40 @@
 </head>
 
 <body>
+
+
+    <form data-dialog-id="reset_password" aria-hidden="true">
+        <!-- Current Password -->
+        <fieldset>
+            <label for="settings_current_password">Current Password</label>
+            <input type="password" id="settings_current_password" name="settings_current_password"
+                autocomplete="current-password" required>
+        </fieldset>
+        <!-- New Password -->
+        <fieldset>
+            <label for="settings_new_password">New Password</label>
+            <input type="password" id="settings_new_password" name="settings_new_password" autocomplete="new-password"
+                pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$" required>
+        </fieldset>
+        <!-- Password Guidelines -->
+        <div class="subtitle note center-mob">
+            <span>
+                <p>A password must be 7 to 16 characters long. It must contain - </p>
+                <p>At least one lowercase alphabet</p>
+                <p>At least one uppercase alphabet</p>
+                <p>At least one number and symbol</p>
+                <p>Password must not contain spaces.</p>
+            </span>
+        </div>
+        <!-- Confirm Password -->
+        <fieldset>
+            <label for="settings_confirm_password">Confirm Password</label>
+            <input type="password" id="settings_confirm_password" name="settings_confirm_password" required>
+        </fieldset>
+    </form>
+
+
+
     <!-- NAVIGATION DRAWER BOX STARTS -->
     <section class="nav-drawer-holder">
     </section>
@@ -36,7 +70,7 @@
             <!-- EDIT AVATAR SECTION STARTS -->
             <section class="edit-avatar-sec">
                 <!-- Current Avatar  -->
-                <picture class="avatar center">
+                <picture class="avatar center">  
                     <button class="ghost edit-avatar-btn mobile-only"><i class="bi bi-person-gear"></i> Change
                         Avatar</button>
                 </picture>
@@ -114,41 +148,14 @@
         </section>
         <!-- EDIT PROFILE SECTION ENDS -->
 
+        <div class="divider"></div>
+        <section class="settings-sec center">
+            <h2 class="fs-700">Settings</h2>
+            <p>Coming Soon.</p>
+        </section>
+
     </main>
     <!-- MAIN ENDS -->
-
-
-    <form data-dialog-id="reset_password" aria-hidden="true">
-        <!-- Current Password -->
-        <fieldset>
-            <label for="settings_current_password">Current Password</label>
-            <input type="password" id="settings_current_password" name="settings_current_password"
-                autocomplete="current-password" required>
-        </fieldset>
-        <!-- New Password -->
-        <fieldset>
-            <label for="settings_new_password">New Password</label>
-            <input type="password" id="settings_new_password" name="settings_new_password" autocomplete="new-password"
-                pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$" required>
-        </fieldset>
-        <!-- Password Guidelines -->
-        <div class="subtitle note center-mob">
-            <span>
-                <p>A password must be 7 to 16 characters long. It must contain - </p>
-                <p>At least one lowercase alphabet</p>
-                <p>At least one uppercase alphabet</p>
-                <p>At least one number and symbol</p>
-                <p>Password must not contain spaces.</p>
-            </span>
-        </div>
-        <!-- Confirm Password -->
-        <fieldset>
-            <label for="settings_confirm_password">Confirm Password</label>
-            <input type="password" id="settings_confirm_password" name="settings_confirm_password" required>
-        </fieldset>
-    </form>
-
-
 
     <!-- Script -->
     <script type="module" src="./js/index.js"></script>
