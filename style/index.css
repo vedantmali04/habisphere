@@ -115,12 +115,7 @@ main header {
   align-items: center;
   padding: 0.4rem 1.6rem;
   gap: 1.6rem;
-}
-
-@media (max-width: 320px) {
-  main header {
-    padding-top: 4.4rem;
-  }
+  min-height: 4.4rem;
 }
 
 main header h1 {
@@ -192,7 +187,7 @@ NAVIGATION DRAWER
 .nav-open-btn {
   position: fixed;
   left: 0;
-  top: 0.4rem;
+  top: 2.8rem;
   z-index: 100;
   margin: 0;
   width: auto !important;
@@ -384,6 +379,12 @@ body:has(.nav-drawer-holder.visible) .nav-open-btn {
 .nav-drawer .nav-footer a {
   color: var(--clr-accent);
   margin: 0 0.4rem;
+}
+
+@media (min-width: 321px) {
+  .nav-open-btn {
+    top: 0.6rem;
+  }
 }
 
 /* NAV On Bigger Screens */
@@ -621,6 +622,18 @@ DIALOG COMPONENT
   border-radius: 1.6rem;
   padding: 0.4rem 0.8rem;
 }
+
+/* /////////////////////////
+  USER INFO
+///////////////////////// */
+
+.user-info-full-name {
+  text-wrap: nowrap;
+}
+
+/* /////////////////////////
+  ANIMATIONS
+///////////////////////// */
 
 @keyframes fadeIn {
   0%,

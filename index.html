@@ -27,71 +27,61 @@
     <!-- MAIN STARTS -->
     <main>
 
-        <!-- HABIT SECTION STARTS -->
-        <section class="habit-sec">
-
-            <!-- Habit Sec Header Starts -->
-            <header>
-                <!-- Logo -->
-                <picture class="logo desk-only" data-size="extra-small"></picture>
-
-                <!-- Headline -->
-                <div class="headline">
-                    <!-- Heading -->
-                    <h1 class="fs-600 center-mobile">
-                        <span class="gradient-text">Habisphere</span>
-                        <span class="icon"><i class="bi bi-dot"></i></span>
-                        <span class="gradient-text gradient-main user-info-full-name"></span>
-                        <!-- Subtitle -->
-                        <p class="subtitle desk-only">Lets improve your habits to next level.</p>
-                    </h1>
-
-
-                    <!-- Header Buttons -->
-                    <div>
-                        <!-- quote button -->
-                        <button class="icon quote-open-btn"><i class="bi bi-quote"></i></button>
-                        <!-- calendar button -->
-                        <button class="icon calendar-open-btn"><i class="bi bi-calendar-week"></i></button>
-                        <!-- new habit primary button -->
-                        <button class="primary new-habit-button desk-only"><i class="bi bi-plus-lg"></i> New
-                            Habit</button>
-                        <!-- new habit FAB button -->
-                        <button class="fab new-habit-button">
-                            <i class="bi bi-plus-lg"></i>
-                            <span class="text">New Habit</span>
-                        </button>
-                    </div>
-
-                </div>
-
-                <button class="text desk-only date-time-box">
-                    <!-- Column Left -->
-                    <div class="col-left">
-                        <span class="date-day-num fs-800">00</span>
-                        <span class="date-day-week"></span>
-                    </div>
-                    <span class="icon"><i class="bi bi-dot"></i></span>
-                    <!-- Column Right -->
-                    <div class="col-right">
-                        <span class="date-month fs-600"></span>
-                        <span class="date-year">0000</span>
-                        <span class="time gradient-text">00:00 AM</span>
-                    </div>
-                </button>
-
-
-            </header>
-            <!-- Habit Sec Header Ends -->
-
-        </section>
-        <!-- HABIT SECTION ENDS -->
+        <!-- HEADER STARTS -->
+        <header>
+            <h1 class="fs-500 ff-def center-mobile">
+                <span class="gradient-text ">Habisphere</span>
+                <span class="icon"><i class="bi bi-dot"></i></span>
+                <span class="gradient-text gradient-main user-info-full-name"></span>
+            </h1>
+        </header>
+        <!-- HEADER ENDS -->
 
         <!-- SIDE SECTION STARTS -->
         <section class="side-sec">
+            <div>
+                <!-- Welcome Day, Date and Time -->
+                <h2 class="fs-700">Happy <span style="text-wrap: nowrap;"><span class="date-day-week"></span>👋</span>
+                </h2>
+                <p class="subtitle fs-400 gradient-text">
+                    <span class="date-day-num"></span>&nbsp;
+                    <span class="date-month"></span>&nbsp;
+                    <span class="date-year"></span>,&nbsp;
+                    <span class="time gradient-text gradient-main"></span>
+                </p>
+            </div>
+
+            <!-- Welcome Message -->
+            <p class="subtitle desk-only">Lets improve your habits to next level.</p>
+
+            <!-- New Habit Button -->
+            <button class="primary new-habit-btn desk-only"><i class="bi bi-plus-lg"></i> New Habit</button>
+            <div class="btn-box">
+                <!-- Quote button -->
+                <button class="icon quote-open-btn"><i class="bi bi-quote"></i></button>
+                <!-- Calendar button -->
+                <button class="icon calendar-open-btn"><i class="bi bi-calendar-week"></i></button>
+                <!-- Statistics button -->
+                <button class="icon statistics-open-btn"><i class="bi bi-bar-chart-line"></i></button>
+                <button class="primary icon new-habit-btn mobile-only"><i class="bi bi-plus-lg"></i></button>
+            </div>
+
         </section>
         <!-- SIDE SECTION ENDS -->
 
+        <!-- STATISTICS SECTION STARTS -->
+        <section class="statistics-sec">
+        </section>
+        <!-- STATISTICS SECTION ENDS -->
+
+        <!-- HABITS SECTION STARTS -->
+        <section class="habits-sec">
+
+            <!-- New Habit FAB -->
+             <button class="fab"><i class="bi bi-plus-lg"></i><span class="text">New Habit</span></button>
+
+        </section>
+        <!-- HABITS SECTION ENDS -->
 
     </main>
     <!-- MAIN ENDS -->

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // QUOTE SETTING
     let quoteOpenBtn = this.querySelector(".quote-open-btn");
 
-    quoteOpenBtn.addEventListener("click", function () {
+    quoteOpenBtn?.addEventListener("click", function () {
 
         createDialog({
             headline: "Quote",

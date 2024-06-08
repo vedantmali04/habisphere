@@ -126,7 +126,6 @@ fieldset {
   visibility: hidden;
 }
 
-
 /* Settings Sec */
 
 .settings-sec {
@@ -134,4 +133,3 @@ fieldset {
   width: 100%;
   background-color: var(--clr-bg-grey);
 }
-

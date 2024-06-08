@@ -18,7 +18,7 @@ button {
   text-transform: capitalize;
   letter-spacing: 1.1px;
   color: var(--clr-text-grey-dark);
-  background-color: transparent;
+  background-color: var(--clr-bg-white);
   width: calc(100% - 0.8rem);
   margin: 0.4rem;
   border-radius: 0.4rem;
@@ -28,6 +28,10 @@ button {
   border: none;
   user-select: none;
   cursor: pointer;
+}
+
+button.primary, button.ghost {
+  min-height: 4.4rem;
 }
 
 button:has(> a) {
