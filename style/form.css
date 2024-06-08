@@ -73,13 +73,13 @@ fieldset .check-radio-box:has(input:disabled) *,
   user-select: none;
 }
 
-button.primary {
+:is(button.primary, button.fab) {
   font-weight: 500;
   background: var(--gradient-main);
   color: var(--clr-bg-white);
 }
 
-button.primary::before {
+:is(button.primary, button.fab)::before {
   content: "";
   position: absolute;
   top: 0;
@@ -90,16 +90,53 @@ button.primary::before {
   z-index: -1;
 }
 
-button.primary:hover::before {
+:is(button.primary, button.fab):hover::before {
   background-color: transparent;
 }
 
-button.primary:active::before {
+:is(button.primary, button.fab):active::before {
   background-color: var(--clr-primary-dark);
 }
 
-button.primary:focus-visible:before {
+:is(button.primary, button.fab):focus-visible:before {
   background-color: transparent;
+}
+
+button.fab {
+  position: fixed;
+  z-index: 15;
+  bottom: 1.6rem;
+  right: 1.6rem;
+  border-radius: 50%;
+  width: 5.6rem;
+  height: 5.6rem;
+  aspect-ratio: 1;
+  box-shadow: 0 0 16px 16px #ffffffc9;
+}
+
+button.fab i {
+  font-size: var(--fs-700) !important;
+}
+
+button.fab .text {
+  position: absolute;
+  opacity: 0;
+}
+
+@media (min-width: 769px) {
+  button.fab {
+    border-radius: 1.6rem;
+    width: fit-content !important;
+    height: auto;
+    aspect-ratio: 0;
+  }
+  button.fab .text {
+    position: static;
+    opacity: 1;
+  }
+  button.fab i {
+    font-size: var(--fs-600) !important;
+  }
 }
 
 button.ghost {
@@ -118,21 +155,20 @@ button.ghost:active {
 button.text {
   padding: 0.4rem;
   width: fit-content;
-  border-radius: 0;
   border-bottom: 1px solid transparent;
   color: var(--clr-accent);
 }
 
 button.text:hover,
 button.text:hover a {
-  color: var(--clr-primary-dark);
+  background-color: var(--clr-hover);
 }
 
 button:hover > i {
   color: initial !important;
 }
 
-button.primary:hover > i {
+:is(button.primary, button.fab):hover > i {
   color: var(--clr-bg-white) !important;
 }
 
@@ -144,6 +180,8 @@ button.icon {
   border-radius: 100%;
   width: 3.2rem;
   min-width: 3.2rem;
+  height: 3.2rem;
+  min-height: 3.2rem;
   aspect-ratio: 1;
   padding: 0;
 }

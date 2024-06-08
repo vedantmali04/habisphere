@@ -9,54 +9,6 @@ import {
 DATA STORAGE FUNCTIONS
 /////////////// */
 
-// FUNCTION to REFRESH INPUT TAG PROPERTIES
-export function refreshInputs() {
-    // FILLABLE INPUTS (all inputs except Radios and Checkboxes)
-    let inputArray = document.querySelectorAll("input:not([type=radio]):not([type=checkbox]), .text-input");
-
-    inputArray.forEach(input => {
-        input.classList.add("text-input");
-        input.classList.toggle("filled", input.value);
-
-        input.addEventListener("blur", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        input.addEventListener("change", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        input.addEventListener("input", function () {
-            input.classList.toggle("filled", input.value)
-        });
-
-        // POPULATE 👁️ Password Visibility Button if current input is Password
-        if (input.type == "password") {
-            let passwordVisibilityBtn = document.createElement("button");
-            passwordVisibilityBtn.type = "button";
-            passwordVisibilityBtn.classList.add("password-visibility-btn", "trail", "icon");
-            passwordVisibilityBtn.innerHTML = `<i class="bi bi-eye"></i><i class="bi bi-eye-slash"></i>`;
-
-            // Get Parent Element of current Password Input and  append Eye button in it.
-            getParentElement(input, UI_CLASSES.fieldset).append(passwordVisibilityBtn);
-
-            // Password Visibility Event
-            passwordVisibilityBtn.addEventListener("click", function (e) {
-                e.preventDefault();
-                input.type = input.type == "password" ? "text" : "password";
-                passwordVisibilityBtn.classList.toggle("visible", input.type != "password");
-            })
-        }
-    })
-
-    // TOGGLE INPUTS like Radio and Checkbox
-    let inputToggleArray = document.querySelectorAll("input[type=radio], input[type=checkbox]");
-    inputToggleArray.forEach(input => {
-        input.classList.add("toggle-input");
-    });
-}
-
-
 // FUNCTION to SAVE data to storage throughout the project
 export function saveToStorage(key, data) {
     try {
@@ -237,6 +189,58 @@ export class User extends Settings {
     UI COMPONENTS FUNCTIONS
 /////////////// */
 
+/* ///////////////
+    FUNCTION FOR HANDLING INPUTS
+/////////////// */
+
+
+// FUNCTION to REFRESH INPUT TAG PROPERTIES
+export function refreshInputs() {
+    // FILLABLE INPUTS (all inputs except Radios and Checkboxes)
+    let inputArr = document.querySelectorAll("input:not([type=radio]):not([type=checkbox]), .text-input");
+
+    inputArr.forEach(input => {
+        input.classList.add("text-input");
+        input.classList.toggle("filled", input.value);
+
+        input.addEventListener("blur", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("change", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        input.addEventListener("input", function () {
+            input.classList.toggle("filled", input.value)
+        });
+
+        // POPULATE 👁️ Password Visibility Button if current input is Password
+        if (input.type == "password") {
+            let passwordVisibilityBtn = document.createElement("button");
+            passwordVisibilityBtn.type = "button";
+            passwordVisibilityBtn.classList.add("password-visibility-btn", "trail", "icon");
+            passwordVisibilityBtn.innerHTML = `<i class="bi bi-eye"></i><i class="bi bi-eye-slash"></i>`;
+
+            // Get Parent Element of current Password Input and  append Eye button in it.
+            getParentElement(input, UI_CLASSES.fieldset).append(passwordVisibilityBtn);
+
+            // Password Visibility Event
+            passwordVisibilityBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                input.type = input.type == "password" ? "text" : "password";
+                passwordVisibilityBtn.classList.toggle("visible", input.type != "password");
+            })
+        }
+    })
+
+    // TOGGLE INPUTS like Radio and Checkbox
+    let inputToggleArr = document.querySelectorAll("input[type=radio], input[type=checkbox]");
+    inputToggleArr.forEach(input => {
+        input.classList.add("toggle-input");
+    });
+}
+
 // FUNCTION to SET specified INPUT MESSAGE
 export function setInputMsg(inputTag, msg, status = UI_STATUS_FEEDBACK.error) {
     removeInputMsg(inputTag, status);
@@ -302,7 +306,7 @@ export function setInputValue(inputTag, value = "") {
 
 
 /* ///////////////
-    OTHER COMPONENTS FUNCTIONS
+    FUNCTIONS FOR CREATING COMPONENTS
 /////////////// */
 
 //     SNACKBAR GENERATION FUNCTION
@@ -354,19 +358,21 @@ export function createDialog(options = {}) {
         headline,
         description,
         componentID,
+        componentPreset = function (component) { },
         fullscreen = false,
         primaryBtnLabel = "Continue",
         secondaryBtnLabel = "Cancel",
-        primaryAction = function () { },
-        secondaryAction = function () { }
+        primaryAction = function () { return true },
+        secondaryAction = function () { return true }
     } = options;
 
     if (!headline) throw new Error("Provide a headline for Dialog");
-    if (!description) throw new Error("Provide a description for Dialog");
 
     // GET AND MAKE COMPONENT VISIBLE
     const component = document.querySelector(`[data-dialog-id="${componentID}"]`);
     component?.setAttribute("aria-hidden", "false");
+
+    componentPreset(component)
 
     // DIALOG SECTION CONSTRUCTION
     const dialogSec = document.createElement("section");
@@ -407,11 +413,13 @@ export function createDialog(options = {}) {
 
     // CLOSE DIALOG BY CANCEL BUTTON PRESS
     let secondaryBtn = dialogSec.querySelector(".secondary-btn");
-    secondaryBtn.addEventListener("click", function () {
-        secondaryAction();
-        removeDialogBox();
-        return false;
-    })
+    if (secondaryBtn) {
+        secondaryBtn.addEventListener("click", function () {
+            secondaryAction();
+            removeDialogBox();
+            return false;
+        })
+    }
 
     // CLOSE DIALOG BY PRIMARY BUTTON PRESS
     let primaryBtn = dialogSec.querySelector(".primary-btn");
@@ -423,7 +431,35 @@ export function createDialog(options = {}) {
     })
 }
 
+/* ///////////////
+    MISCELLANEOUS HELPER UTILITY FUNCTION
+/////////////// */
 
+// Convert single digit number to 2 digit
+export function toTwoDigit(num) {
+    return ("0" + num).slice(-2);
+}
+
+// Generate random integer between given number
+// FISHER YATES SHUFFLE 
+export function getRandomInRange(min, max) {
+    // Create an array [start,......,end]
+    const allNumbers = [];
+    for (let i = min; i <= max; i++) {
+        allNumbers.push(i);
+    }
+    // Fisher-Yates Array shuffle
+    let i = allNumbers.length;
+    while (i !== 0) {
+        let randomIndex = Math.floor(Math.random() * i);
+        i--;
+        // Swap current element with random index
+        [allNumbers[i], allNumbers[randomIndex]] = [allNumbers[randomIndex], allNumbers[i]];
+    }
+
+    // Return Random Array element
+    return allNumbers[Math.floor(Math.random() * allNumbers.length)];
+}
 
 
 ((function () {

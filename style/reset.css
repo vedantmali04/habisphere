@@ -173,6 +173,7 @@ h6 {
 
 .subtitle,
 .fs-300 {
+  color: var(--clr-text-grey-light);
   font-size: var(--fs-300);
 }
 

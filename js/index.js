@@ -4,10 +4,13 @@ import {
     STORAGE_KEY,
     UI_CLASSES,
     UI_SIZE,
-    UI_STATUS_FEEDBACK
+    UI_STATUS_FEEDBACK,
+    TIME_WEEK_DAYS,
+    TIME_MONTHS
 } from "./components/data.js";
 import { saveToStorage, getFromStorage, generateUniqueID, refreshInputs } from "./components/utils.js";
 import { getCurrentFileName, getParentElement } from "./components/utils.js";
+import { toTwoDigit } from "./components/utils.js";
 
 let CURRENT_USER = getFromStorage(STORAGE_KEY.current_user)[0];
 const CURRENT_FILE_NAME = getCurrentFileName();
@@ -145,9 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ///////////////
         POPULATE LOGO
     /////////////// */
-    let pictureLogoArray = this.querySelectorAll(".logo");
+    let pictureLogoArr = this.querySelectorAll(".logo");
 
-    pictureLogoArray.forEach(logo => {
+    pictureLogoArr.forEach(logo => {
         let img = this.createElement("img");
         img.src = "./assets/logo/logo.svg";
         switch (logo.getAttribute("data-size")) {
@@ -178,16 +181,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ///////////////
-        POPULATE AVATAR
+        POPULATE AVATAR and PERSONAL INFORMATION
     /////////////// */
 
-    let pictureAvatarArray = this.querySelectorAll(".avatar");
+    let pictureAvatarArr = this.querySelectorAll(".avatar");
 
-    pictureAvatarArray.forEach(elem => {
+    pictureAvatarArr.forEach(elem => {
         let img = this.createElement("img");
         img.src = `./assets/avatars/${CURRENT_USER.avatar}`;
         img.alt = CURRENT_USER.full_name.split(" ")[0];
         elem.appendChild(img);
+    })
+
+    let userFullnameArr = this.querySelectorAll(".user-info-full-name");
+
+    userFullnameArr.forEach(elem => {
+        elem.innerText = CURRENT_USER.full_name;
     })
 
 
@@ -200,8 +209,8 @@ document.addEventListener("DOMContentLoaded", function () {
         LOGOUT BUTTON
     /////////////// */
 
-    let logoutBtnArray = this.querySelectorAll(".logout-btn")
-    logoutBtnArray.forEach(btn => {
+    let logoutBtnArr = this.querySelectorAll(".logout-btn")
+    logoutBtnArr.forEach(btn => {
         btn.addEventListener("click", function (e) {
             e.preventDefault();
 
@@ -210,5 +219,46 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "./login.html";
         })
     })
+
+    /* ///////////////
+        CURRENT DATE AND TIME HANDLING
+    /////////////// */
+
+    let dateDayNumBoxArr = this.querySelectorAll(".date-day-num");
+    let dateDayWeekBoxArr = this.querySelectorAll(".date-day-week");
+    let dateMonthBoxArr = this.querySelectorAll(".date-month");
+    let dateYearBoxArr = this.querySelectorAll(".date-year");
+    let timeBoxArr = this.querySelectorAll(".time");
+
+    setInterval(() => {
+        const DATE = new Date();
+
+        // Date Day Number
+        dateDayNumBoxArr.forEach(elem => {
+            elem.innerHTML = toTwoDigit(DATE.getDate());
+        })
+
+        // Month Name
+        dateMonthBoxArr.forEach(elem => {
+            elem.innerHTML = TIME_MONTHS[DATE.getMonth()].slice(0, 3);
+        })
+
+        // Year
+        dateYearBoxArr.forEach(elem => {
+            elem.innerHTML = DATE.getFullYear();
+        })
+
+        // Weekday
+        dateDayWeekBoxArr.forEach(elem => {
+            elem.innerHTML = TIME_WEEK_DAYS[DATE.getDay()];
+        })
+
+        // Current time
+        timeBoxArr.forEach(elem => {
+            let hours = DATE.getHours();
+            let meridian = hours >= 12 ? "PM" : "AM";
+            elem.innerHTML = `${toTwoDigit(hours % 12 || hours)}:${toTwoDigit(DATE.getMinutes())} ${meridian}`
+        })
+    }, 1000);
 
 });

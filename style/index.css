@@ -53,14 +53,14 @@ UTILITY CLASSES
 }
 
 .center,
-.center-mob {
+.center-mobile {
   text-align: center;
   margin: auto;
   width: fit-content;
 }
 
 @media (min-width: 769px) {
-  .center-mob {
+  .center-mobile {
     text-align: left;
     margin: 0;
     width: 100%;
@@ -112,9 +112,15 @@ main header {
   border-bottom: 1px solid var(--clr-divider);
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0.4rem 1.6rem;
+  gap: 1.6rem;
+}
+
+@media (max-width: 320px) {
+  main header {
+    padding-top: 4.4rem;
+  }
 }
 
 main header h1 {
@@ -128,6 +134,13 @@ main header button {
 @media (min-width: 769px) {
   main header h1 {
     font-size: var(--fs-600) !important;
+    padding-left: 3.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  main header h1 {
+    padding-left: 0;
   }
 }
 
@@ -157,9 +170,17 @@ button,
   order: 2;
   font-family: var(--ff-head);
   font-size: var(--fs-500);
+}
+
+.logo p,
+.gradient-text {
   background-image: var(--gradient-logo);
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.gradient-text.gradient-main {
+  background-image: var(--gradient-main);
 }
 
 /* /////////////////////////
