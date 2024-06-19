@@ -309,15 +309,11 @@ export function setInputValue(inputTag, value = "") {
     FUNCTIONS FOR CREATING COMPONENTS
 /////////////// */
 
-//     SNACKBAR GENERATION FUNCTION
+// SNACKBAR GENERATION FUNCTION
 
 export function createSnackbar(options = {}) {
     // OPTION DEFAULTS
-    const {
-        msg,
-        status = UI_STATUS_FEEDBACK.tip,
-        undo
-    } = options;
+    const { msg, status = UI_STATUS_FEEDBACK.info, undo } = options;
 
     // ERROR CONDITIONS - msg must exist
     if (!msg) throw new Error("Provide a message for Snackbar");
@@ -372,7 +368,7 @@ export function createDialog(options = {}) {
     const component = document.querySelector(`[data-dialog-id="${componentID}"]`);
     component?.setAttribute("aria-hidden", "false");
 
-    componentPreset(component)
+    if (componentPreset) componentPreset(component);
 
     // DIALOG SECTION CONSTRUCTION
     const dialogSec = document.createElement("section");

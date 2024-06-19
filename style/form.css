@@ -408,9 +408,9 @@ fieldset .msg.success,
   color: var(--clr-success);
 }
 
-fieldset .msg.tip,
-.note.tip {
-  color: var(--clr-tip);
+fieldset .msg.info,
+.note.info {
+  color: var(--clr-info);
 }
 
 .note.warning {
@@ -434,9 +434,9 @@ fieldset .msg.success::before,
   content: "\F26A";
 }
 
-fieldset .msg.tip::before,
-.snackbar.tip .msg::before,
-.note.tip::before {
+fieldset .msg.info::before,
+.snackbar.info .msg::before,
+.note.info::before {
   content: "\F468";
 }
 
@@ -444,7 +444,7 @@ fieldset .msg.tip::before,
   content: "\F33A";
 }
 
-.note:not(.danger, .success, .warning, .tip):before {
+.note:not(.danger, .success, .warning, .info):before {
   content: "\F431";
 }
 
@@ -470,7 +470,7 @@ fieldset .msg.success {
   order: 5;
 }
 
-fieldset .msg.tip {
+fieldset .msg.info {
   order: 6;
 }
 

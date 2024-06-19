@@ -491,7 +491,7 @@ SNACKBAR COMPONENT
 }
 
 .snackbar {
-  --clr-snackbar-theme: var(--clr-tip-light);
+  --clr-snackbar-theme: var(--clr-info-light);
   border: 2px solid var(--clr-snackbar-theme);
   background-color: var(--clr-text-grey-dark);
   min-height: 6.4rem;
@@ -516,8 +516,8 @@ SNACKBAR COMPONENT
   --clr-snackbar-theme: var(--clr-success-light);
 }
 
-.snackbar.tip {
-  --clr-snackbar-theme: var(--clr-tip-light);
+.snackbar.info {
+  --clr-snackbar-theme: var(--clr-info-light);
 }
 
 .snackbar button {
@@ -578,9 +578,11 @@ DIALOG COMPONENT
   margin: 0;
   width: 100%;
   max-height: fit-content;
+  min-height: 100vh;
   border-radius: 0;
   padding: 2.4rem;
   overflow: visible;
+  display: block;
 }
 
 .dialog .dialog-body {

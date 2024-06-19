@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
 
         // Remove previous messages, if any
-        removeInputMsg(this, UI_STATUS_FEEDBACK.tip);
+        removeInputMsg(this, UI_STATUS_FEEDBACK.info);
         removeInputMsg(fullnameInput);
         removeInputMsg(usernameInput);
         removeInputMsg(bioInput);
@@ -141,9 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
             inputBio == bio &&
             inputEmail == email
         ) {
-            setInputMsg(this, "You haven't made any changes.", UI_STATUS_FEEDBACK.tip);
+            setInputMsg(this, "You haven't made any changes.", UI_STATUS_FEEDBACK.info);
             setTimeout(() => {
-                removeInputMsg(this, UI_STATUS_FEEDBACK.tip);
+                removeInputMsg(this, UI_STATUS_FEEDBACK.info);
             }, 7000);
             return;
         }

@@ -56,7 +56,7 @@ export const STATUS_HTTP_RESPONSE = {
 // Input Status
 export const UI_STATUS_FEEDBACK = {
     error: "error",
-    tip: "tip",
+    info: "info",
     success: "success"
 }
 
@@ -71,7 +71,7 @@ export const UI_CLASSES = {
     fieldset: "fieldset",
     error: "error",
     success: "success",
-    tip: "tip"
+    info: "info"
 }
 
 // HTML UI Size

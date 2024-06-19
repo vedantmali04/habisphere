@@ -40,6 +40,21 @@ main .side-sec {
   display: flex;
   flex-direction: column;
   row-gap: 0.8rem;
+  position: relative;
+}
+
+@media (max-width: 320px) {
+  main .side-sec .btn-box {
+    position: absolute;
+    flex-direction: column;
+    right: 0;
+    top: 50%;
+    translate: 0 -50%;
+  }
+
+  main .side-sec .btn-box .new-habit-btn {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -55,6 +70,7 @@ main .side-sec {
   padding: 0.4rem;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 .side-sec .btn-box button {
